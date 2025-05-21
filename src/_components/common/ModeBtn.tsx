@@ -49,7 +49,6 @@ export default function ModeBtn() {
           </div>
         </div>
       </div>
-      <p>{theme}</p>
     </>
   );
 }

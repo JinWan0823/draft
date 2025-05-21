@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "@/_styles/globals.css";
-import HeadNav from "@/_components/common/HeadNav";
 import ModeBtn from "@/_components/common/ModeBtn";
 
 export const metadata: Metadata = {
@@ -16,7 +15,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <HeadNav />
         <main>{children}</main>
         <footer></footer>
         <ModeBtn />
