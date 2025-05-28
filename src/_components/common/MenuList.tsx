@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { JSX } from "react";
 import { BsClipboard, BsFillPeopleFill, BsHighlighter } from "react-icons/bs";
@@ -33,9 +35,9 @@ export default function MenuList({ category }: ListProps) {
   const IconComponent = categoryToIcon[category];
   return (
     <li
-      className="h-50 bg-gray-200 dark:bg-blue-200 transition-transform hover:-translate-y-4 ease-in rounded-md shadow-xl overflow-hidden relative
+      className="h-50 bg-gray-200 transition-transform hover:-translate-y-4 ease-in rounded-md shadow-xl overflow-hidden relative
       after:content-[''] after:w-[0px] after:h-[4px] after:bg-[#333] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2
-      after:transition-all after:ease-in hover:after:w-full"
+      after:transition-all after:ease-in hover:after:w-full dark:bg-[#333]"
     >
       <Link
         href={`/${path}`}
