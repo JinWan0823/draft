@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "@/_styles/globals.css";
+import "./globals.css";
 import ModeBtn from "@/_components/common/ModeBtn";
 
 export const metadata: Metadata = {
