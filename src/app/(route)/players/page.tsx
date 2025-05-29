@@ -2,6 +2,7 @@
 
 import Logo from "@/_components/common/Logo";
 import CustomSelect from "@/_components/common/players/CustomSelect";
+import PlayerCard from "@/_components/common/players/PlayerCard";
 import SelectOpt from "@/_components/common/players/SelectOpt";
 import SearchBar from "@/_components/common/SearchBar";
 import { useState } from "react";
@@ -37,6 +38,18 @@ export default function Players() {
           />
         </ul>
       </div>
+      <ul className="grid grid-cols-4 gap-6 w-full mt-[20px]">
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+      </ul>
     </section>
   );
 }

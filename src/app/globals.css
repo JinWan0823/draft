@@ -38,6 +38,23 @@ body {
   font-family: var(--font-sans);
 }
 
+@layer components {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px; /* 스크롤바 너비 */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #f37812; /* 스크롤바 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+    border: 2px solid #333; /* 테두리 색상 */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* 스크롤 트랙 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+  }
+}
+
 body {
   @apply bg-white text-black transition-colors duration-300;
 }
