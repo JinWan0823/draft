@@ -1,35 +1,35 @@
 import { PiSoccerBallDuotone } from "react-icons/pi";
 import { GiTrophyCup } from "react-icons/gi";
 
-export default function PlayerCareer() {
+interface CareerProps {
+  position:string;
+  career : string[];
+}
+
+export default function PlayerCareer({position,career} : CareerProps) {
   return (
     <>
-      {" "}
       <ul className="h-[90px] overflow-y-scroll mt-[10px] custom-scrollbar">
         <li>
           <p className="flex items-center">
             <span className="mr-[8px] text-[#f37812]">
               <PiSoccerBallDuotone />
-            </span>{" "}
-            스트라이커
+            </span>
+            {position}
           </p>
         </li>
-        <li>
-          <p className="flex items-center">
-            <span className="mr-[8px] text-[#f37812]">
-              <GiTrophyCup />
-            </span>{" "}
-            감드컵 시즌1 우승
-          </p>
-        </li>
-        <li>
-          <p className="flex items-center">
-            <span className="mr-[8px] text-[#f37812]">
-              <GiTrophyCup />
-            </span>{" "}
-            감드컵 시즌2 준우승
-          </p>
-        </li>
+        {
+          career.map((item) =>(
+            <li>
+              <p className="flex items-center">
+                <span className="mr-[8px] text-[#f37812]">
+                  <GiTrophyCup />
+                </span>
+                {item}
+              </p>
+            </li>
+          ))
+        }
       </ul>
     </>
   );
