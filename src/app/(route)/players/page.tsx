@@ -6,6 +6,7 @@ import PlayerCard from "@/_components/common/players/PlayerCard";
 import SelectOpt from "@/_components/common/players/SelectOpt";
 import SearchBar from "@/_components/common/SearchBar";
 import { useState } from "react";
+import { dummyPlayers } from "../../../../dumy";
 
 export default function Players() {
   const [selectedOpt, setSelectedOpt] = useState("이름순");
@@ -39,16 +40,9 @@ export default function Players() {
         </ul>
       </div>
       <ul className="grid grid-cols-4 gap-6 w-full mt-[20px]">
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
-        <PlayerCard />
+        {dummyPlayers.map((item,idx) => (
+          <PlayerCard key={idx} item={item}/>
+        ))}
       </ul>
     </section>
   );

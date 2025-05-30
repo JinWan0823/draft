@@ -2,7 +2,19 @@ import Image from "next/image";
 import PositionBadge from "./PositionBadge";
 import PlayerCareer from "./PlayerCareer";
 
-export default function PlayerCard() {
+interface PlayerProps {
+  item : ItemProps
+}
+
+interface ItemProps {
+    id: number;
+  name:string;
+  position:string;
+  image : string;
+  achievements : string[];
+}
+
+export default function PlayerCard({item}:PlayerProps) {
   return (
     <li className="relative bg-gray-200 rounded-md shadow-xl overflow-hidden dark:bg-[#333] cursor-pointer group">
       {/* 상하좌우 선 애니메이션  */}
@@ -13,7 +25,7 @@ export default function PlayerCard() {
       <div className="text-black dark:text-white">
         <div className="img-box overflow-hidden">
           <Image
-            src={"https://picsum.photos/300/200"}
+            src={item.image}
             alt="더미이미지"
             width={298}
             height={360}
@@ -21,8 +33,8 @@ export default function PlayerCard() {
           />
         </div>
         <div className="p-[16px] py-[20px]">
-          <p className="font-bold text-xl">감스트</p>
-          <PlayerCareer />
+          <p className="font-bold text-xl">{item.name}</p>
+          <PlayerCareer position={item.position} career={item.achievements} />
           <button
             type="button"
             className="w-full mt-[10px] rounded p-[8px] text-white bg-[#f37812] cursor-pointer"
