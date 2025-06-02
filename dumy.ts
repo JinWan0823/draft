@@ -1,11 +1,15 @@
-// dummyPlayers.ts
 export const dummyPlayers = [
   {
     id: 1,
     name: "박도윤",
     position: "스트라이커",
     image: "https://picsum.photos/id/1011/300/200",
-    achievements: ["감드컵 시즌1 우승", "감드컵 시즌2 준우승"],
+    achievements: [
+      "감드컵 시즌1 우승",
+      "감드컵 시즌2 준우승",
+      "감드컵 시즌2 준우승",
+      "감드컵 시즌2 준우승",
+    ],
   },
   {
     id: 2,
@@ -17,7 +21,7 @@ export const dummyPlayers = [
   {
     id: 3,
     name: "김서연",
-    position: "미드필더",
+    position: "센터 미드필더",
     image: "https://picsum.photos/id/1044/300/200",
     achievements: ["감드컵 시즌2 우승", "MVP 수상"],
   },
@@ -31,8 +35,43 @@ export const dummyPlayers = [
   {
     id: 5,
     name: "최지호",
-    position: "윙어",
+    position: "윙포워드",
     image: "https://picsum.photos/id/1033/300/200",
     achievements: ["감드컵 시즌3 득점왕", "감드컵 시즌3 우승"],
+  },
+  {
+    id: 6,
+    name: "윤시우",
+    position: "풀백",
+    image: "https://picsum.photos/id/1060/300/200",
+    achievements: ["감드컵 시즌1 베스트11"],
+  },
+  {
+    id: 7,
+    name: "배서준",
+    position: "수비형 미드필더",
+    image: "https://picsum.photos/id/1074/300/200",
+    achievements: ["감드컵 시즌2 태클왕"],
+  },
+  {
+    id: 8,
+    name: "장예린",
+    position: "올라운더",
+    image: "https://picsum.photos/id/1084/300/200",
+    achievements: ["감드컵 시즌3 멀티포지션상"],
+  },
+  {
+    id: 9,
+    name: "서하윤",
+    position: "수비형 미드필더",
+    image: "https://picsum.photos/id/1018/300/200",
+    achievements: ["감드컵 시즌3 준우승", "감드컵 시즌3 베스트11"],
+  },
+  {
+    id: 10,
+    name: "강민재",
+    position: "올라운더",
+    image: "https://picsum.photos/id/1003/300/200",
+    achievements: ["감드컵 시즌2 전 경기 풀타임", "감드컵 시즌2 도움왕"],
   },
 ];
