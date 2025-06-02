@@ -3,18 +3,18 @@ import PositionBadge from "./PositionBadge";
 import PlayerCareer from "./PlayerCareer";
 
 interface PlayerProps {
-  item : ItemProps
+  item: ItemProps;
 }
 
 interface ItemProps {
-    id: number;
-  name:string;
-  position:string;
-  image : string;
-  achievements : string[];
+  id: number;
+  name: string;
+  position: string;
+  image: string;
+  achievements: string[];
 }
 
-export default function PlayerCard({item}:PlayerProps) {
+export default function PlayerCard({ item }: PlayerProps) {
   return (
     <li className="relative bg-gray-200 rounded-md shadow-xl overflow-hidden dark:bg-[#333] cursor-pointer group">
       {/* 상하좌우 선 애니메이션  */}
@@ -44,7 +44,7 @@ export default function PlayerCard({item}:PlayerProps) {
         </div>
       </div>
 
-      <PositionBadge />
+      <PositionBadge position={item.position} />
     </li>
   );
 }
