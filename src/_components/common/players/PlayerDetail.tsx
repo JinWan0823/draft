@@ -2,23 +2,31 @@ import Image from "next/image";
 import { GiTrophyCup } from "react-icons/gi";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { PiSoccerBallDuotone } from "react-icons/pi";
-import { FaMedal } from "react-icons/fa";
 import PositionBadge from "./PositionBadge";
 import { IoClose } from "react-icons/io5";
+import CareerList from "./CareerList";
 
 interface PlayerProps {
   info: ItemProps;
+  handleModal: () => void;
+}
+
+interface Achivement {
+  tournament: string;
+  result: string;
 }
 
 interface ItemProps {
   id: number;
   name: string;
   position: string;
+  subPosition: string;
+  note: string;
   image: string;
-  achievements: string[];
+  achievements: Achivement[];
 }
 
-export default function PlayerDetail({ info }: PlayerProps) {
+export default function PlayerDetail({ info, handleModal }: PlayerProps) {
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#333333bf] flex items-center justify-center">
       <div className="bg-[#fff] rounded-[20px] max-w-[900px] w-[90%] max-h-[85vh] overflow-y-auto custom-scrollbar">
@@ -31,11 +39,12 @@ export default function PlayerDetail({ info }: PlayerProps) {
             className="w-full h-full object-cover"
           />
           <div className="absolute left-[16px] bottom-[16px]">
-            <PositionBadge position="스트라이커" />
+            <PositionBadge position={info.position} />
           </div>
           <button
             type="button"
             className="close-btn absolute right-[16px] top-[16px] text-sm bg-[#fff] font-bold py-[2px] px-[10px] rounded-[8px] flex items-center"
+            onClick={() => handleModal()}
           >
             닫기 <IoClose />
           </button>
@@ -52,11 +61,11 @@ export default function PlayerDetail({ info }: PlayerProps) {
             <ul className="p-[16px]">
               <li className="flex items-center">
                 <PiSoccerBallDuotone className="mr-1 text-[#f37812]" /> 주포지션
-                : 스트라이커
+                : {info.position}
               </li>
               <li className="flex items-center mt-2">
                 <PiSoccerBallDuotone className="mr-1 text-[#f37812]" /> 부포지션
-                : 윙포워드
+                : {info.subPosition}
               </li>
               <li className="mt-2">
                 <div className="flex items-center">
@@ -64,7 +73,7 @@ export default function PlayerDetail({ info }: PlayerProps) {
                   특이사항
                 </div>
                 <p className="p-2 bg-[#dfdfdf] mt-1 text-sm rounded">
-                  특이사항 입력란입니다.
+                  {info.note}
                 </p>
               </li>
             </ul>
@@ -78,46 +87,9 @@ export default function PlayerDetail({ info }: PlayerProps) {
               </p>
             </div>
             <ul className="p-2 py-4 space-y-3">
-              {/* 금메달 */}
-              <li
-                className="w-full p-4 border-l-6 rounded-[12px] bg-gradient-to-r from-white via-white to-[#FFD700] flex items-center"
-                style={{ borderColor: "#FFD700" }}
-              >
-                <FaMedal className="text-xl mr-3 text-[#FFD700]" /> 감드컵 시즌1
-                - 우승
-              </li>
-
-              {/* 은메달 */}
-              <li
-                className="w-full p-4 border-l-6 rounded-[12px] bg-gradient-to-r from-white via-white to-[#C0C0C0] flex items-center"
-                style={{ borderColor: "#C0C0C0" }}
-              >
-                <FaMedal className="text-xl mr-3 text-[#C0C0C0]" /> 감드컵 시즌2
-                - 준우승
-              </li>
-
-              {/* 동메달 */}
-              <li
-                className="w-full p-4 border-l-6 rounded-[12px] bg-gradient-to-r from-white via-white to-[#CD7F32] flex items-center"
-                style={{ borderColor: "#CD7F32" }}
-              >
-                <FaMedal className="text-xl mr-3 text-[#CD7F32]" /> 감드컵 시즌3
-                - 3위
-              </li>
-              <li
-                className="w-full p-4 border-l-6 rounded-[12px] bg-gradient-to-r from-white via-white to-[#CD7F32] flex items-center"
-                style={{ borderColor: "#CD7F32" }}
-              >
-                <FaMedal className="text-xl mr-3 text-[#CD7F32]" /> 감드컵 시즌3
-                - 3위
-              </li>
-              <li
-                className="w-full p-4 border-l-6 rounded-[12px] bg-gradient-to-r from-white via-white to-[#CD7F32] flex items-center"
-                style={{ borderColor: "#CD7F32" }}
-              >
-                <FaMedal className="text-xl mr-3 text-[#CD7F32]" /> 감드컵 시즌3
-                - 3위
-              </li>
+              {info.achievements.map((career, idx) => (
+                <CareerList key={idx} career={career} />
+              ))}
             </ul>
           </div>
         </div>
