@@ -14,7 +14,7 @@ export default function PositionBadge({ position }: PositionBadgeProps) {
       올라운더: "ALL",
     };
 
-    return positionMap[posi] || "GK"; // 기본값 GK
+    return positionMap[posi] || "GK";
   };
 
   const getBadgeColor = (posi: string): string => {

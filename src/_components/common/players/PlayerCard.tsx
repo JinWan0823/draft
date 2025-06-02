@@ -2,20 +2,35 @@ import Image from "next/image";
 import PositionBadge from "./PositionBadge";
 import PlayerCareer from "./PlayerCareer";
 import PlayerDetail from "./PlayerDetail";
+import { useState } from "react";
 
 interface PlayerProps {
   item: ItemProps;
+}
+
+interface Achivement {
+  tournament: string;
+  result: string;
 }
 
 interface ItemProps {
   id: number;
   name: string;
   position: string;
+  subPosition: string;
+  note: string;
   image: string;
-  achievements: string[];
+  achievements: Achivement[];
 }
 
 export default function PlayerCard({ item }: PlayerProps) {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModal = () => {
+    setOpenModal((prev) => !prev);
+    document.documentElement.classList.toggle("modal-open");
+  };
+
   return (
     <>
       <li className="relative bg-gray-200 rounded-md shadow-xl overflow-hidden dark:bg-[#333] cursor-pointer group">
@@ -43,6 +58,7 @@ export default function PlayerCard({ item }: PlayerProps) {
             <button
               type="button"
               className="w-full mt-[10px] rounded p-[8px] text-white bg-[#f37812] cursor-pointer"
+              onClick={() => handleModal()}
             >
               상세정보
             </button>
@@ -50,7 +66,7 @@ export default function PlayerCard({ item }: PlayerProps) {
         </div>
       </li>
 
-      <PlayerDetail info={item} />
+      {openModal && <PlayerDetail info={item} handleModal={handleModal} />}
     </>
   );
 }

@@ -1,9 +1,14 @@
 import { PiSoccerBallDuotone } from "react-icons/pi";
 import { GiTrophyCup } from "react-icons/gi";
 
+interface Achivement {
+  tournament: string;
+  result: string;
+}
+
 interface CareerProps {
   position: string;
-  career: string[];
+  career: Achivement[];
 }
 
 export default function PlayerCareer({ position, career }: CareerProps) {
@@ -24,7 +29,7 @@ export default function PlayerCareer({ position, career }: CareerProps) {
               <span className="mr-[8px] text-[#f37812]">
                 <GiTrophyCup />
               </span>
-              {item}
+              {item.tournament} {item.result}
             </p>
           </li>
         ))}
