@@ -15,6 +15,34 @@ export default function Players() {
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
 
   const sortOptions = ["이름순", "포지션순"];
+  const positionOrder = [
+    "스트라이커",
+    "윙포워드",
+    "센터 미드필더",
+    "수비형 미드필더",
+    "수비수",
+    "풀백",
+    "골키퍼",
+    "올라운더",
+  ];
+
+  const filteredPlayers = dummyPlayers
+    .filter(
+      (player) =>
+        selectedPosition === "포지션 선택" ||
+        player.position === selectedPosition
+    )
+    .sort((a, b) => {
+      if (selectedOpt === "이름순") {
+        return a.name.localeCompare(b.name, "ko"); // 한글 이름 정렬
+      }
+      if (selectedOpt === "포지션순") {
+        const aIndex = positionOrder.indexOf(a.position);
+        const bIndex = positionOrder.indexOf(b.position);
+        return aIndex - bIndex;
+      }
+      return 0;
+    });
 
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
@@ -52,14 +80,16 @@ export default function Players() {
           <div className="p-[4px] px-[12px] flex items-center bg-white rounded">
             <MdFilterAlt className="text-4xl text-[#f37812] mr-[12px]" />
             <div>
-              <span className="font-bold text-2xl">{dummyPlayers.length}</span>
+              <span className="font-bold text-2xl">
+                {filteredPlayers.length}
+              </span>
               <p className="text-sm leading-3">필터링된 선수</p>
             </div>
           </div>
         </div>
       </div>
       <ul className="grid grid-cols-4 gap-6 w-full mt-[20px]">
-        {dummyPlayers.map((item, idx) => (
+        {filteredPlayers.map((item, idx) => (
           <PlayerCard key={idx} item={item} />
         ))}
       </ul>

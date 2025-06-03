@@ -15,7 +15,16 @@ export default function CustomSelect({
 }: CustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const positions = ["ST", "CM", "CB", "GK", "초기화"];
+  const positions = [
+    "스트라이커",
+    "윙포워드",
+    "센터 미드필더",
+    "수비형 미드필더",
+    "수비수",
+    "풀백",
+    "골키퍼",
+    "올라운더",
+  ];
 
   const handleSelect = (pos: string) => {
     if (pos === "초기화") {
