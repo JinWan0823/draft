@@ -1,9 +1,9 @@
 "use client";
 
 import Logo from "@/_components/common/Logo";
-import CustomSelect from "@/_components/common/players/CustomSelect";
-import PlayerCard from "@/_components/common/players/PlayerCard";
-import SelectOpt from "@/_components/common/players/SelectOpt";
+import CustomSelect from "@/_components/players/CustomSelect";
+import PlayerCard from "@/_components/players/PlayerCard";
+import SelectOpt from "@/_components/players/SelectOpt";
 import SearchBar from "@/_components/common/SearchBar";
 import { useState } from "react";
 import { dummyPlayers } from "../../../../dumy";
