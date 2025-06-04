@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import Logo from "./Logo";
+import { IoClose } from "react-icons/io5";
+import MenuLi from "./MenuLi";
 
 interface MenuProps {
   handleMenuTab: () => void;
@@ -11,15 +14,30 @@ export default function Menu({ handleMenuTab }: MenuProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#333333bf]"
+      onClick={() => handleMenuTab()}
     >
       <motion.div
         initial={{ x: "-100%" }}
         animate={{ x: 0 }}
         exit={{ x: "-100%" }}
         transition={{ type: "spring", stiffness: 400, damping: 60 }}
-        className="absolute w-[200px] h-full bg-[#fdb980] top-0 left-0"
+        className="absolute w-[360px] h-full bg-[#fdb980] py-[80px] top-0 left-0"
+        onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={handleMenuTab}>X</button>
+        <button
+          className="w-[40px] h-[40px] bg-[#dfdfdf] absolute top-[10px] right-[10px] inset-shadow-sm inset-shadow-indigo-500/50 rounded-full cursor-pointer flex items-center justify-center"
+          onClick={handleMenuTab}
+        >
+          <IoClose className="text-[#f37812]" />
+        </button>
+        <Logo />
+        <ul className="text-[#fff] text-xl p-[10px] font-bold">
+          <MenuLi handleMenuTab={handleMenuTab} menu={"홈"} />
+          <MenuLi handleMenuTab={handleMenuTab} menu={"선수목록"} />
+          <MenuLi handleMenuTab={handleMenuTab} menu={"전술보드"} />
+          <MenuLi handleMenuTab={handleMenuTab} menu={"드래프트"} />
+          <MenuLi handleMenuTab={handleMenuTab} menu={"선수 티어메이커"} />
+        </ul>
       </motion.div>
     </motion.div>
   );
