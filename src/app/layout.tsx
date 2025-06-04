@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ModeBtn from "@/_components/common/ModeBtn";
+import MenuBtn from "@/_components/common/MenuBtn";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body>
         <main>{children}</main>
         <footer></footer>
+        <MenuBtn />
         <ModeBtn />
       </body>
     </html>
