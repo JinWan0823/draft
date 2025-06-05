@@ -35,7 +35,7 @@ export default function PositionBadge({ position }: PositionBadgeProps) {
 
   return (
     <div
-      className={`font-bold text-white py-[2px] px-[10px] rounded-[8px] ${getBadgeColor(position)}`}
+      className={`inline font-bold text-white py-[2px] px-[10px] rounded-[8px] ${getBadgeColor(position)}`}
     >
       {renamePosition(position)}
     </div>
