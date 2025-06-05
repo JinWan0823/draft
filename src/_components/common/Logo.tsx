@@ -3,7 +3,7 @@ export default function Logo() {
   return (
     <>
       <Image
-        src={"/logo_light.webp"}
+        src={"/logo.png"}
         alt="logo"
         width={700}
         height={140}

@@ -7,6 +7,8 @@ interface MenuProps {
   handleMenuTab: () => void;
 }
 
+const menuList = ["홈", "선수목록", "전술보드", "드래프트", "티어메이커"];
+
 export default function Menu({ handleMenuTab }: MenuProps) {
   return (
     <motion.div
@@ -32,11 +34,9 @@ export default function Menu({ handleMenuTab }: MenuProps) {
         </button>
         <Logo />
         <ul className="text-[#fff] text-xl p-[10px] font-bold">
-          <MenuLi handleMenuTab={handleMenuTab} menu={"홈"} />
-          <MenuLi handleMenuTab={handleMenuTab} menu={"선수목록"} />
-          <MenuLi handleMenuTab={handleMenuTab} menu={"전술보드"} />
-          <MenuLi handleMenuTab={handleMenuTab} menu={"드래프트"} />
-          <MenuLi handleMenuTab={handleMenuTab} menu={"선수 티어메이커"} />
+          {menuList.map((item, idx) => (
+            <MenuLi key={idx} handleMenuTab={handleMenuTab} menu={item} />
+          ))}
         </ul>
       </motion.div>
     </motion.div>
