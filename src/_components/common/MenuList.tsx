@@ -10,7 +10,7 @@ interface ListProps {
 
 const categoryToPath: { [key: string]: string } = {
   "선수 목록": "players",
-  전술보드: "playboard",
+  전술보드: "tactics",
   드래프트: "draft",
   "선수 티어메이커": "tiermaker",
 };
