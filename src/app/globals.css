@@ -60,7 +60,7 @@ button {
 }
 
 body {
-  @apply bg-white text-black transition-colors duration-300;
+  @apply bg-[#f5eedd] text-black transition-colors duration-300;
 }
 html.dark body {
   @apply bg-black text-white;
