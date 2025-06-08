@@ -3,8 +3,22 @@
 import { useState } from "react";
 import TacticBadge from "./TacticBadge";
 
-export default function DraggablePlayer() {
-  const [pos, setPos] = useState({ x: 50, y: 20 });
+interface PlayerInfo {
+  name: string;
+  image: string;
+  position: string;
+  x: number;
+  y: number;
+}
+
+export default function DraggablePlayer({
+  name,
+  image,
+  position,
+  x,
+  y,
+}: PlayerInfo) {
+  const [pos, setPos] = useState({ x: x, y: y });
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -33,10 +47,13 @@ export default function DraggablePlayer() {
       style={{ top: pos.y, left: pos.x }}
       onMouseDown={handleMouseDown}
     >
-      <div className="img relative w-[44px] h-[44px] rounded-full bg-[#333] shadow-xl">
-        <TacticBadge position="스트라이커" />
+      <div
+        className="img relative w-[44px] h-[44px] rounded-full bg-[#333] shadow-xl bg-cover bg-center"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <TacticBadge position={position} />
       </div>
-      <span className="px-2 text-sm bg-white rounded-[8px] mt-1">감스트</span>
+      <span className="px-2 text-sm bg-white rounded-[8px] mt-1">{name}</span>
     </div>
   );
 }
