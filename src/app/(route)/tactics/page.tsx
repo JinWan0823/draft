@@ -23,6 +23,9 @@ export default function Tactice() {
     const player = JSON.parse(data);
     const rect = e.currentTarget.getBoundingClientRect();
 
+    const isAleadyPlayer = players.some((p) => p.name === player.name);
+    if (isAleadyPlayer) return;
+
     setPlayers((prev) => [
       ...prev,
       {
