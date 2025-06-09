@@ -3,7 +3,9 @@
 import Logo from "@/_components/common/Logo";
 import Board from "@/_components/tactics/Board";
 import DraggablePlayer from "@/_components/tactics/DraggablePlayer";
+import DummyPlayer from "@/_components/tactics/DummyPlayer";
 import TacticList from "@/_components/tactics/TacticList";
+import ToolList from "@/_components/tactics/ToolList";
 import { useState } from "react";
 
 interface PlayerInfo {
@@ -14,8 +16,15 @@ interface PlayerInfo {
   y: number;
 }
 
+interface DummyInfo {
+  team: number;
+  x: number;
+  y: number;
+}
+
 export default function Tactice() {
   const [players, setPlayers] = useState<PlayerInfo[]>([]);
+  const [dummyPlayers, setDummyPlayers] = useState<DummyInfo[]>([]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -44,14 +53,18 @@ export default function Tactice() {
     <section className="w-[1100px] mx-auto py-[120px]">
       <Logo />
       <TacticList />
+      <ToolList setDummyPlayers={setDummyPlayers} />
       <div
         className="p-[20px] w-auto bg-white relative mx-auto shadow-lg rounded"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
         <Board />
-        {players.map((player, index) => (
-          <DraggablePlayer key={index} {...player} />
+        {players.map((player, idx) => (
+          <DraggablePlayer key={idx} {...player} />
+        ))}
+        {dummyPlayers.map((player, idx) => (
+          <DummyPlayer key={idx} {...player} />
         ))}
       </div>
     </section>
