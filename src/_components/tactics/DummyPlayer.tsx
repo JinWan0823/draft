@@ -1,23 +1,13 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
-import TacticBadge from "./TacticBadge";
 
-interface PlayerInfo {
-  name: string;
-  image: string;
-  position: string;
+interface DummyPlayerProps {
   x: number;
   y: number;
+  team: number;
 }
 
-export default function DraggablePlayer({
-  name,
-  image,
-  position,
-  x,
-  y,
-}: PlayerInfo) {
+export default function DummyPlayer({ x, y, team }: DummyPlayerProps) {
   const [pos, setPos] = useState({ x, y });
   const ref = useRef<HTMLDivElement>(null);
   const [parentSize, setParentSize] = useState({ width: 0, height: 0 });
@@ -61,12 +51,10 @@ export default function DraggablePlayer({
       onMouseDown={handleMouseDown}
     >
       <div
-        className="img relative w-[44px] h-[44px] rounded-full bg-[#333] shadow-xl bg-cover bg-center"
-        style={{ backgroundImage: `url(${image})` }}
-      >
-        <TacticBadge position={position} />
-      </div>
-      <span className="px-2 text-sm bg-white rounded-[8px] mt-1">{name}</span>
+        className="img relative w-[44px] h-[44px] rounded-full bg-white shadow-xl bg-cover bg-center"
+        style={{ backgroundImage: `url(/team${team}.png)` }}
+      ></div>
+      <span className="px-2 text-sm bg-white rounded-[8px] mt-1">선수</span>
     </div>
   );
 }
