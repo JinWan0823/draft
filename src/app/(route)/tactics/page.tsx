@@ -1,6 +1,7 @@
 "use client";
 
 import Logo from "@/_components/common/Logo";
+import Ball from "@/_components/tactics/Ball";
 import Board from "@/_components/tactics/Board";
 import DraggablePlayer from "@/_components/tactics/DraggablePlayer";
 import DummyPlayer from "@/_components/tactics/DummyPlayer";
@@ -25,6 +26,7 @@ interface DummyInfo {
 export default function Tactice() {
   const [players, setPlayers] = useState<PlayerInfo[]>([]);
   const [dummyPlayers, setDummyPlayers] = useState<DummyInfo[]>([]);
+  const [ball, setBall] = useState(false);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -53,7 +55,11 @@ export default function Tactice() {
     <section className="w-[1100px] mx-auto py-[120px]">
       <Logo />
       <TacticList />
-      <ToolList setDummyPlayers={setDummyPlayers} />
+      <ToolList
+        setDummyPlayers={setDummyPlayers}
+        setBall={setBall}
+        ball={ball}
+      />
       <div
         className="p-[20px] w-auto bg-white relative mx-auto shadow-lg rounded"
         onDrop={handleDrop}
@@ -66,6 +72,7 @@ export default function Tactice() {
         {dummyPlayers.map((player, idx) => (
           <DummyPlayer key={idx} {...player} />
         ))}
+        {ball && <Ball x={528} y={278} />}
       </div>
     </section>
   );
