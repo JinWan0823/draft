@@ -3,35 +3,20 @@ import { FaUserMinus, FaUserPlus } from "react-icons/fa6";
 import { PiSoccerBallDuotone } from "react-icons/pi";
 
 interface ToolListProps {
-  setDummyPlayers: React.Dispatch<SetStateAction<PlayerInfo[]>>;
   setBall: React.Dispatch<SetStateAction<boolean>>;
   ball: boolean;
-}
-
-interface PlayerInfo {
-  x: number;
-  y: number;
-  team: number;
+  handleDeleteMode: () => void;
+  deleteMode: boolean;
+  handleDummyPlayer: (team: number) => void;
 }
 
 export default function ToolList({
-  setDummyPlayers,
+  handleDummyPlayer,
   setBall,
   ball,
+  handleDeleteMode,
+  deleteMode,
 }: ToolListProps) {
-  const handleDummyPlayer = (teamNumber: number) => {
-    const randomX = Math.floor(Math.random() * 800) + 100;
-    const randomY = Math.floor(Math.random() * 550);
-    setDummyPlayers((prev) => [
-      ...prev,
-      {
-        x: randomX,
-        y: randomY,
-        team: teamNumber,
-      },
-    ]);
-  };
-
   return (
     <div className="p-1 py-2 w-[180px] fixed right-[20px] top-1/2 -translate-y-1/2 bg-white shadow-xl rounded-[20px] border-r-4 border-[#f37812]">
       <p className="text-lg font-bold text-center text-[#f37812]">도구 목록</p>
@@ -55,8 +40,12 @@ export default function ToolList({
         >
           <FaUserPlus className="text-lg mr-2" /> 더미선수2팀
         </li>
-        <li className="bg-red-600 mt-1 rounded flex items-center text-white font-bold p-2 px-3 cursor-pointer">
-          <FaUserMinus className="text-lg mr-2" /> 선수 제거
+        <li
+          className="bg-red-600 mt-1 rounded flex items-center text-white font-bold p-2 px-3 cursor-pointer"
+          onClick={() => handleDeleteMode()}
+        >
+          <FaUserMinus className="text-lg mr-2" /> 선수 제거{" "}
+          {!deleteMode || "완료"}
         </li>
       </ul>
     </div>

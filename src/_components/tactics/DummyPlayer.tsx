@@ -1,13 +1,22 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import DeleteBtn from "./DeleteBtn";
 
 interface DummyPlayerProps {
   x: number;
   y: number;
   team: number;
+  deleteMode: boolean;
+  onDelete: () => void;
 }
 
-export default function DummyPlayer({ x, y, team }: DummyPlayerProps) {
+export default function DummyPlayer({
+  x,
+  y,
+  team,
+  deleteMode,
+  onDelete,
+}: DummyPlayerProps) {
   const [pos, setPos] = useState({ x, y });
   const ref = useRef<HTMLDivElement>(null);
   const [parentSize, setParentSize] = useState({ width: 0, height: 0 });
@@ -53,7 +62,9 @@ export default function DummyPlayer({ x, y, team }: DummyPlayerProps) {
       <div
         className="img relative w-[44px] h-[44px] rounded-full bg-white shadow-xl bg-cover bg-center"
         style={{ backgroundImage: `url(/team${team}.png)` }}
-      ></div>
+      >
+        {deleteMode && <DeleteBtn onClick={onDelete} />}
+      </div>
       <span className="px-2 text-sm bg-white rounded-[8px] mt-1">선수</span>
     </div>
   );
