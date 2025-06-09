@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import TacticBadge from "./TacticBadge";
+import DeleteBtn from "./DeleteBtn";
 
 interface PlayerInfo {
   name: string;
@@ -9,6 +10,8 @@ interface PlayerInfo {
   position: string;
   x: number;
   y: number;
+  deleteMode: boolean;
+  onDelete: () => void;
 }
 
 export default function DraggablePlayer({
@@ -17,6 +20,8 @@ export default function DraggablePlayer({
   position,
   x,
   y,
+  deleteMode,
+  onDelete,
 }: PlayerInfo) {
   const [pos, setPos] = useState({ x, y });
   const ref = useRef<HTMLDivElement>(null);
@@ -65,6 +70,7 @@ export default function DraggablePlayer({
         style={{ backgroundImage: `url(${image})` }}
       >
         <TacticBadge position={position} />
+        {deleteMode && <DeleteBtn onClick={onDelete} />}
       </div>
       <span className="px-2 text-sm bg-white rounded-[8px] mt-1">{name}</span>
     </div>

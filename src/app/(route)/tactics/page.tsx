@@ -7,8 +7,8 @@ import DraggablePlayer from "@/_components/tactics/DraggablePlayer";
 import DummyPlayer from "@/_components/tactics/DummyPlayer";
 import TacticList from "@/_components/tactics/TacticList";
 import ToolList from "@/_components/tactics/ToolList";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 interface PlayerInfo {
   name: string;
   image: string;
@@ -21,12 +21,14 @@ interface DummyInfo {
   team: number;
   x: number;
   y: number;
+  id: string;
 }
 
 export default function Tactice() {
   const [players, setPlayers] = useState<PlayerInfo[]>([]);
   const [dummyPlayers, setDummyPlayers] = useState<DummyInfo[]>([]);
   const [ball, setBall] = useState(false);
+  const [deleteMode, setDeleteMode] = useState(false);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -47,18 +49,50 @@ export default function Tactice() {
     ]);
   };
 
+  const handleDummyPlayer = (teamNumber: number) => {
+    const randomX = Math.floor(Math.random() * 800) + 100;
+    const randomY = Math.floor(Math.random() * 550);
+    setDummyPlayers((prev) => [
+      ...prev,
+      {
+        id: uuidv4(),
+        x: randomX,
+        y: randomY,
+        team: teamNumber,
+      },
+    ]);
+  };
+
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
+
+  const handleDeleteMode = () => {
+    setDeleteMode((prev) => !prev);
+  };
+
+  const handleDeleteDummyPlayer = (id: string) => {
+    setDummyPlayers((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  const handleDeletePlayer = (name: string) => {
+    setPlayers((prev) => prev.filter((p) => p.name !== name));
+  };
+
+  useEffect(() => {
+    console.log(dummyPlayers);
+  }, [dummyPlayers]);
 
   return (
     <section className="w-[1100px] mx-auto py-[120px]">
       <Logo />
       <TacticList />
       <ToolList
-        setDummyPlayers={setDummyPlayers}
+        handleDummyPlayer={handleDummyPlayer}
         setBall={setBall}
         ball={ball}
+        handleDeleteMode={handleDeleteMode}
+        deleteMode={deleteMode}
       />
       <div
         className="p-[20px] w-auto bg-white relative mx-auto shadow-lg rounded"
@@ -66,11 +100,21 @@ export default function Tactice() {
         onDragOver={handleDragOver}
       >
         <Board />
-        {players.map((player, idx) => (
-          <DraggablePlayer key={idx} {...player} />
+        {players.map((player) => (
+          <DraggablePlayer
+            key={player.name}
+            {...player}
+            deleteMode={deleteMode}
+            onDelete={() => handleDeletePlayer(player.name)}
+          />
         ))}
-        {dummyPlayers.map((player, idx) => (
-          <DummyPlayer key={idx} {...player} />
+        {dummyPlayers.map((player) => (
+          <DummyPlayer
+            key={player.id}
+            {...player}
+            deleteMode={deleteMode}
+            onDelete={() => handleDeleteDummyPlayer(player.id)}
+          />
         ))}
         {ball && <Ball x={528} y={278} />}
       </div>
