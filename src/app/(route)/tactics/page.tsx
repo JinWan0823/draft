@@ -5,6 +5,7 @@ import Ball from "@/_components/tactics/Ball";
 import Board from "@/_components/tactics/Board";
 import DraggablePlayer from "@/_components/tactics/DraggablePlayer";
 import DummyPlayer from "@/_components/tactics/DummyPlayer";
+import TacticIntro from "@/_components/tactics/TacticIntro";
 import TacticList from "@/_components/tactics/TacticList";
 import ToolList from "@/_components/tactics/ToolList";
 import { useEffect, useState } from "react";
@@ -94,8 +95,10 @@ export default function Tactice() {
         handleDeleteMode={handleDeleteMode}
         deleteMode={deleteMode}
       />
+
+      <TacticIntro />
       <div
-        className="p-[20px] w-auto bg-white relative mx-auto shadow-lg rounded"
+        className="p-[20px] mt-6 w-auto bg-white relative mx-auto shadow-lg rounded"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
