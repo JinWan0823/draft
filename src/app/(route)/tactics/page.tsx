@@ -4,6 +4,8 @@ import Logo from "@/_components/common/Logo";
 import Ball from "@/_components/tactics/Ball";
 import Board from "@/_components/tactics/Board";
 import DraggablePlayer from "@/_components/tactics/DraggablePlayer";
+import DrawingCanvas from "@/_components/tactics/DrawingCanvas";
+import DrawTool from "@/_components/tactics/DrawTool";
 import DummyPlayer from "@/_components/tactics/DummyPlayer";
 import TacticIntro from "@/_components/tactics/TacticIntro";
 import TacticList from "@/_components/tactics/TacticList";
@@ -30,6 +32,10 @@ export default function Tactice() {
   const [dummyPlayers, setDummyPlayers] = useState<DummyInfo[]>([]);
   const [ball, setBall] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
+
+  const [redPen, setRedPen] = useState(false);
+  const [bluePen, setBluePen] = useState(false);
+  const [drawing, setDrawing] = useState(false);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -88,21 +94,31 @@ export default function Tactice() {
     <section className="w-[1100px] mx-auto py-[120px]">
       <Logo />
       <TacticList />
-      <ToolList
-        handleDummyPlayer={handleDummyPlayer}
-        setBall={setBall}
-        ball={ball}
-        handleDeleteMode={handleDeleteMode}
-        deleteMode={deleteMode}
-      />
+      <div className="fixed right-[20px] top-1/2 -translate-y-1/2">
+        <ToolList
+          handleDummyPlayer={handleDummyPlayer}
+          setBall={setBall}
+          ball={ball}
+          handleDeleteMode={handleDeleteMode}
+          deleteMode={deleteMode}
+        />
+        <DrawTool
+          redPen={redPen}
+          bluePen={bluePen}
+          setRedPen={setRedPen}
+          setBluePen={setBluePen}
+          setDrawing={setDrawing}
+        />
+      </div>
 
       <TacticIntro />
       <div
-        className="p-[20px] mt-6 w-auto bg-white relative mx-auto shadow-lg rounded"
+        className="p-[20px] mt-6 w-full bg-white relative mx-auto shadow-lg rounded"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
         <Board />
+        {drawing && <DrawingCanvas redPen={redPen} />}
         {players.map((player) => (
           <DraggablePlayer
             key={player.name}

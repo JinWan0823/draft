@@ -18,7 +18,7 @@ export default function ToolList({
   deleteMode,
 }: ToolListProps) {
   return (
-    <div className="p-1 py-2 w-[180px] fixed right-[20px] top-1/2 -translate-y-1/2 bg-white shadow-xl rounded-[20px] border-r-4 border-[#f37812]">
+    <div className="p-1 py-2 w-[180px] bg-white shadow-xl rounded-[20px] border-r-4 border-[#f37812]">
       <p className="text-lg font-bold text-center text-[#f37812]">도구 목록</p>
       <ul className="mt-2 p-2">
         <li
