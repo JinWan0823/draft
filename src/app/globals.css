@@ -57,6 +57,10 @@ body {
 
 button {
   cursor: pointer;
+  transition: all 0.2s;
+}
+button:hover {
+  transform: translateY(-4px);
 }
 
 body {
