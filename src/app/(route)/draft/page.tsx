@@ -5,7 +5,7 @@ import CoachCard from "@/_components/draft/CoachCard";
 import DraftIntro from "@/_components/draft/DraftIntro";
 import { useState } from "react";
 import { FaUserTie } from "react-icons/fa6";
-import { dummyPlayers, positionMenu } from "../../../../dumy";
+import { dummyPlayers, positionMenu, softColors } from "../../../../dumy";
 import BtnWrap from "@/_components/draft/BtnWrap";
 import PositionCategory from "@/_components/draft/PositionCategory";
 
@@ -13,6 +13,7 @@ export interface CoachProps {
   name: string;
   image: string;
   teamPlayer: TeamPlayerProps[];
+  color: string;
 }
 
 interface TeamPlayerProps {
@@ -23,6 +24,11 @@ interface TeamPlayerProps {
 export default function Draft() {
   const [inputValue, setInputValue] = useState("");
   const [coachList, setCoachList] = useState<CoachProps[]>([]);
+
+  const getRandomColor = () => {
+    const idx = Math.floor(Math.random() * softColors.length);
+    return softColors[idx];
+  };
 
   const handleCoach = () => {
     if (!inputValue.trim()) return;
@@ -37,6 +43,7 @@ export default function Draft() {
       name: inputValue.trim(),
       image: foundPlayer ? foundPlayer.image : "/team1.png",
       teamPlayer: [],
+      color: getRandomColor(),
     };
 
     setCoachList((prev) => [...prev, newCoach]);
@@ -47,6 +54,10 @@ export default function Draft() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleCoach();
+  };
+
+  const handleCoachReset = () => {
+    setCoachList([]);
   };
 
   return (
@@ -70,7 +81,7 @@ export default function Draft() {
             + 감독 추가
           </button>
         </form>
-        <BtnWrap />
+        <BtnWrap handleCoachReset={handleCoachReset} />
         <ul className="flex flex-wrap items-start justify-center mt-4 gap-5">
           {coachList.map((coach, idx) => (
             <CoachCard key={idx} coach={coach} />
