@@ -1,29 +1,51 @@
-export default function CoachCard() {
+import { CoachProps } from "@/app/(route)/draft/page";
+
+interface CoachInfo {
+  coach: CoachProps;
+}
+
+export default function CoachCard({ coach }: CoachInfo) {
   return (
-    <li className="shadow-xl p-4 py-8 rounded-[16px] border-gray-300 border-1 border-t-6 w-[23.5%] bg-white">
-      <div className="img-box w-[110px] h-[110px] mx-auto border-1 rounded-full bg-[#333]"></div>
-      <h4 className="font-bold text-center text-lg mt-4">감스트</h4>
-      <div className="mt-4 rounded-[16px] border-t-2 py-4 p-2">
-        <p className="text-center">감스트팀 선수 목록 (0명)</p>
+    <li
+      className="shadow-xl p-4 py-8 rounded-[16px] border-1 border-gray-200 w-[23.5%] bg-white"
+      style={{
+        borderTop: `6px solid ${coach.color}`,
+      }}
+    >
+      <div
+        className={`img-box w-[110px] h-[110px] mx-auto border-1 rounded-full bg-[#333] bg-center bg-cover`}
+        style={{ backgroundImage: `url(${coach.image})` }}
+      ></div>
+      <h4
+        className="font-bold text-center text-lg mt-4"
+        style={{ color: coach.color }}
+      >
+        {coach.name}
+      </h4>
+      <div
+        className="mt-4 rounded-[16px] border-t-2 py-4 p-2"
+        style={{ color: coach.color }}
+      >
+        <p className="text-center">
+          {coach.name}팀 선수 목록 ({coach.teamPlayer.length}명)
+        </p>
         <ul className="mt-2">
-          <li className="mt-1 border-1 border-gray-200 p-2 rounded text-sm">
-            (선수 없음)
-          </li>
-          <li className="mt-1 border-1 border-gray-200 p-2 rounded text-sm">
-            감스트
-          </li>
-          <li className="mt-1 border-1 border-gray-200 p-2 rounded text-sm">
-            감스트
-          </li>
-          <li className="mt-1 border-1 border-gray-200 p-2 rounded text-sm">
-            감스트
-          </li>
-          <li className="mt-1 border-1 border-gray-200 p-2 rounded text-sm">
-            감스트
-          </li>
-          <li className="mt-1 border-1 border-gray-200 p-2 rounded text-sm">
-            감스트
-          </li>
+          {coach.teamPlayer.length === 0 ? (
+            <li className="mt-1 border-1 border-gray-200 p-2 rounded text-sm text-gray-500">
+              (선수 없음)
+            </li>
+          ) : (
+            <>
+              {coach.teamPlayer.map((player, idx) => (
+                <li
+                  key={idx}
+                  className="mt-1 border-1 border-gray-200 p-2 rounded text-sm text-gray-500"
+                >
+                  {player.name}
+                </li>
+              ))}
+            </>
+          )}
         </ul>
       </div>
     </li>
