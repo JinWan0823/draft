@@ -105,3 +105,14 @@ export const dummyPlayers = [
     ],
   },
 ];
+
+export const positionMenu = [
+  "스트라이커",
+  "윙포워드",
+  "센터 미드필더",
+  "수비형 미드필더",
+  "수비수",
+  "풀백",
+  "골키퍼",
+  "올라운더",
+];

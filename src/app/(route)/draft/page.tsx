@@ -5,12 +5,19 @@ import CoachCard from "@/_components/draft/CoachCard";
 import DraftIntro from "@/_components/draft/DraftIntro";
 import { useState } from "react";
 import { FaUserTie } from "react-icons/fa6";
-import { dummyPlayers } from "../../../../dumy";
+import { dummyPlayers, positionMenu } from "../../../../dumy";
 import BtnWrap from "@/_components/draft/BtnWrap";
+import PositionCategory from "@/_components/draft/PositionCategory";
 
 export interface CoachProps {
   name: string;
   image: string;
+  teamPlayer: TeamPlayerProps[];
+}
+
+interface TeamPlayerProps {
+  name: string;
+  position: string;
 }
 
 export default function Draft() {
@@ -29,6 +36,7 @@ export default function Draft() {
     const newCoach = {
       name: inputValue.trim(),
       image: foundPlayer ? foundPlayer.image : "/team1.png",
+      teamPlayer: [],
     };
 
     setCoachList((prev) => [...prev, newCoach]);
@@ -68,6 +76,17 @@ export default function Draft() {
             <CoachCard key={idx} coach={coach} />
           ))}
         </ul>
+      </div>
+
+      <div className="p-4 mt-8 bg-white rounded shadow-xl">
+        <h2 className="text-[#f37812] py-4 border-b-1 border-gray-300 flex items-center text-xl font-bold">
+          <FaUserTie className="text-2xl mr-2" /> 선수 관리
+        </h2>
+        <div className="flex flex-wrap items-start gap-4 my-4">
+          {positionMenu.map((posi, idx) => (
+            <PositionCategory key={idx} position={posi} />
+          ))}
+        </div>
       </div>
     </section>
   );
