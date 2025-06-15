@@ -133,7 +133,7 @@ export default function Draft() {
         />
         <ul className="flex flex-wrap items-start justify-center mt-4 gap-5">
           {coachList.map((coach, idx) => (
-            <CoachCard key={idx} coach={coach} />
+            <CoachCard key={idx} coach={coach} currentOrder={currentOrder} />
           ))}
         </ul>
       </div>

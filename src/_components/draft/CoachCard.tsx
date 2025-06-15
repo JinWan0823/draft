@@ -2,19 +2,25 @@ import { CoachProps } from "@/app/(route)/draft/page";
 
 interface CoachInfo {
   coach: CoachProps;
+  currentOrder: number;
 }
 
-export default function CoachCard({ coach }: CoachInfo) {
+export default function CoachCard({ coach, currentOrder }: CoachInfo) {
   return (
     <li
-      className="shadow-xl relative p-4 py-8 rounded-[16px] border-1 border-gray-200 w-[23.5%] bg-white"
+      className={`shadow-xl relative p-4 py-8 rounded-[16px] border-1 border-gray-200 w-[23.5%] bg-white
+        ${coach.order === currentOrder - 1 ? "rank-active" : ""}`}
       style={{
         borderTop: `6px solid ${coach.color}`,
       }}
     >
-      <span className="absolute top-[10px] left-[10px] text-xl">
-        {coach.order ? coach.order : ""}
-      </span>
+      {coach.order ? (
+        <span className="absolute top-[10px] left-[10px] text-xl w-[30px] h-[30px] rounded-full bg-[#f37812] text-white font-bold flex items-center justify-center">
+          {coach.order ? coach.order : ""}
+        </span>
+      ) : (
+        ""
+      )}
       <div
         className={`img-box w-[110px] h-[110px] mx-auto border-1 rounded-full bg-[#333] bg-center bg-cover`}
         style={{ backgroundImage: `url(${coach.image})` }}
