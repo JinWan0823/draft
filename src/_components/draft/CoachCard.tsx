@@ -7,11 +7,14 @@ interface CoachInfo {
 export default function CoachCard({ coach }: CoachInfo) {
   return (
     <li
-      className="shadow-xl p-4 py-8 rounded-[16px] border-1 border-gray-200 w-[23.5%] bg-white"
+      className="shadow-xl relative p-4 py-8 rounded-[16px] border-1 border-gray-200 w-[23.5%] bg-white"
       style={{
         borderTop: `6px solid ${coach.color}`,
       }}
     >
+      <span className="absolute top-[10px] left-[10px] text-xl">
+        {coach.order ? coach.order : ""}
+      </span>
       <div
         className={`img-box w-[110px] h-[110px] mx-auto border-1 rounded-full bg-[#333] bg-center bg-cover`}
         style={{ backgroundImage: `url(${coach.image})` }}
