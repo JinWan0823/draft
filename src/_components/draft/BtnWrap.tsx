@@ -3,13 +3,20 @@ import { FaUserMinus } from "react-icons/fa6";
 
 interface BtnProps {
   handleCoachReset: () => void;
+  handleRandomSelect: () => void;
 }
 
-export default function BtnWrap({ handleCoachReset }: BtnProps) {
+export default function BtnWrap({
+  handleCoachReset,
+  handleRandomSelect,
+}: BtnProps) {
   return (
     <div className="flex items-center justify-between mt-2">
       <div className="flex items-center">
-        <button className="flex items-center mr-2 bg-[#f37812] p-2 text-white rounded">
+        <button
+          onClick={handleRandomSelect}
+          className="flex items-center mr-2 bg-[#f37812] p-2 text-white rounded"
+        >
           <FaRandom className="mr-2" /> 랜덤 감독 선택
         </button>
         <button

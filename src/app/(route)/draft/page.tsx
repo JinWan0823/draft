@@ -3,7 +3,7 @@
 import Logo from "@/_components/common/Logo";
 import CoachCard from "@/_components/draft/CoachCard";
 import DraftIntro from "@/_components/draft/DraftIntro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaUserTie } from "react-icons/fa6";
 import { dummyPlayers, positionMenu, softColors } from "../../../../dumy";
 import BtnWrap from "@/_components/draft/BtnWrap";
@@ -14,6 +14,7 @@ export interface CoachProps {
   image: string;
   teamPlayer: TeamPlayerProps[];
   color: string;
+  order?: number;
 }
 
 interface TeamPlayerProps {
@@ -25,9 +26,54 @@ export default function Draft() {
   const [inputValue, setInputValue] = useState("");
   const [coachList, setCoachList] = useState<CoachProps[]>([]);
 
+  const [currentOrder, setCurrentOrder] = useState(1);
+  const [isReset, setIsReset] = useState(false);
+
   const getRandomColor = () => {
     const idx = Math.floor(Math.random() * softColors.length);
     return softColors[idx];
+  };
+
+  useEffect(() => {
+    if (isReset) {
+      setIsReset(false);
+      handleRandomSelect();
+      // 번호가 전부 지정되었을경우 초기화 후 실행
+    }
+  }, [isReset]);
+
+  const handleRandomSelect = () => {
+    if (coachList.length === 0) {
+      alert("먼저 감독을 추가해주세요!");
+      return;
+    }
+
+    const unassigned = coachList.filter((coach) => coach.order === undefined);
+
+    if (unassigned.length === 0) {
+      const resetCoachList = coachList.map((coach) => ({
+        ...coach,
+        order: undefined,
+      }));
+      setCoachList(resetCoachList);
+      setCurrentOrder(1);
+      setIsReset(true);
+
+      return;
+    }
+
+    const randomIdx = Math.floor(Math.random() * unassigned.length);
+    const selectedCoachName = unassigned[randomIdx].name;
+
+    const updateCoachList = coachList.map((coach) => {
+      if (coach.name === selectedCoachName) {
+        return { ...coach, order: currentOrder };
+      }
+      return coach;
+    });
+
+    setCoachList(updateCoachList);
+    setCurrentOrder((prev) => prev + 1);
   };
 
   const handleCoach = () => {
@@ -81,7 +127,10 @@ export default function Draft() {
             + 감독 추가
           </button>
         </form>
-        <BtnWrap handleCoachReset={handleCoachReset} />
+        <BtnWrap
+          handleCoachReset={handleCoachReset}
+          handleRandomSelect={handleRandomSelect}
+        />
         <ul className="flex flex-wrap items-start justify-center mt-4 gap-5">
           {coachList.map((coach, idx) => (
             <CoachCard key={idx} coach={coach} />
