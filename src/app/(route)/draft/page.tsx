@@ -17,7 +17,7 @@ export interface CoachProps {
   order?: number;
 }
 
-interface TeamPlayerProps {
+export interface TeamPlayerProps {
   name: string;
   position: string;
 }
@@ -27,6 +27,9 @@ export default function Draft() {
   const [coachList, setCoachList] = useState<CoachProps[]>([]);
 
   const [currentOrder, setCurrentOrder] = useState(1);
+  const [selectedCoachName, setSelectedCoachName] = useState<string | null>(
+    null
+  );
   const [isReset, setIsReset] = useState(false);
 
   const getRandomColor = () => {
@@ -72,8 +75,36 @@ export default function Draft() {
       return coach;
     });
 
+    setSelectedCoachName(unassigned[randomIdx].name);
     setCoachList(updateCoachList);
     setCurrentOrder((prev) => prev + 1);
+  };
+
+  const handlePlayerSelect = (player: TeamPlayerProps) => {
+    if (selectedCoachName === null) return;
+
+    const alreadySelected = coachList.some((coach) =>
+      coach.teamPlayer.some((p) => p.name === player.name)
+    );
+    if (alreadySelected) return;
+
+    const updateCoachList = coachList.map((coach) => {
+      if (coach.name === selectedCoachName) {
+        return {
+          ...coach,
+          teamPlayer: [...coach.teamPlayer, player],
+        };
+      }
+      return coach;
+    });
+
+    setCoachList(updateCoachList);
+  };
+
+  const isAlreadySelected = (playerName: string) => {
+    return coachList.some((coach) =>
+      coach.teamPlayer.some((player) => player.name === playerName)
+    );
   };
 
   const handleCoach = () => {
@@ -104,6 +135,8 @@ export default function Draft() {
 
   const handleCoachReset = () => {
     setCoachList([]);
+    setCurrentOrder(1);
+    setSelectedCoachName(null);
   };
 
   return (
@@ -144,7 +177,12 @@ export default function Draft() {
         </h2>
         <div className="flex flex-wrap items-start gap-4 my-4">
           {positionMenu.map((posi, idx) => (
-            <PositionCategory key={idx} position={posi} />
+            <PositionCategory
+              key={idx}
+              position={posi}
+              handlePlayerSelect={handlePlayerSelect}
+              isAlreadySelected={isAlreadySelected}
+            />
           ))}
         </div>
       </div>
