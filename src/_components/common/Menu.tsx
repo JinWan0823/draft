@@ -15,7 +15,7 @@ export default function Menu({ handleMenuTab }: MenuProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#333333bf]"
+      className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#000000bf]"
       onClick={() => handleMenuTab()}
     >
       <motion.div
