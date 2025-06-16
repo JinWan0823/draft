@@ -12,7 +12,7 @@ export default function DraftIntro() {
           드래프트 도구를 사용하여 팀을 구성하세요.{" "}
           <b className="text-lg">먼저 감독을 추가</b>하고, 선수들을 각
           포지션별로 선택하면 됩니다. <b className="text-lg">더블클릭</b>으로
-          선수목록에서 선수를 제외 가능합니다.
+          선수목록에서 선수를 제외할 수 있습니다.
         </p>
       </div>
     </div>

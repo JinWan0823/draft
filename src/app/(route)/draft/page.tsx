@@ -139,6 +139,15 @@ export default function Draft() {
     setSelectedCoachName(null);
   };
 
+  const handlePlayerDelete = (name: string) => {
+    const updateCoachList = coachList.map((coach) => ({
+      ...coach,
+      teamPlayer: coach.teamPlayer.filter((player) => player.name !== name),
+    }));
+
+    setCoachList(updateCoachList);
+  };
+
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
       <Logo />
@@ -166,7 +175,12 @@ export default function Draft() {
         />
         <ul className="flex flex-wrap items-start justify-center mt-4 gap-5">
           {coachList.map((coach, idx) => (
-            <CoachCard key={idx} coach={coach} currentOrder={currentOrder} />
+            <CoachCard
+              key={idx}
+              coach={coach}
+              handlePlayerDelete={handlePlayerDelete}
+              currentOrder={currentOrder}
+            />
           ))}
         </ul>
       </div>
