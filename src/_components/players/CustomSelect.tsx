@@ -1,53 +1,38 @@
 "use client";
 
 import React, { SetStateAction, useState } from "react";
+import { positionMenu } from "../../../dumy";
+import { FaSortDown } from "react-icons/fa6";
 
 interface CustomSelectProps {
-  setSelectedOpt: React.Dispatch<SetStateAction<string>>;
   selectedPosition: string;
   setSelectedPosition: React.Dispatch<SetStateAction<string>>;
+  onSelectExtra?: () => void;
 }
 
 export default function CustomSelect({
-  setSelectedOpt,
   selectedPosition,
   setSelectedPosition,
 }: CustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const positions = [
-    "스트라이커",
-    "윙포워드",
-    "센터 미드필더",
-    "수비형 미드필더",
-    "수비수",
-    "풀백",
-    "골키퍼",
-    "올라운더",
-  ];
-
   const handleSelect = (pos: string) => {
-    if (pos === "초기화") {
-      setSelectedPosition("포지션 선택");
-      setIsOpen(false);
-      return;
-    }
-    setSelectedOpt("");
     setSelectedPosition(pos);
     setIsOpen(false);
   };
 
   return (
-    <div className="relative w-[120px] mx-[4px]">
-      <button
+    <div className="relative w-[full] mx-[4px] ">
+      <div
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-[10px] py-[4px] border rounded bg-white shadow cursor-pointer"
+        className="w-full px-[10px] py-[4px] border border-gray-300 rounded bg-white shadow cursor-pointer relative"
       >
         {selectedPosition}
-      </button>
+        <FaSortDown className="absolute right-[4px] top-1/2 translate-y-[-75%]" />
+      </div>
       {isOpen && (
-        <ul className="absolute top-full left-0 w-full mt-2 border rounded bg-white shadow z-10 ">
-          {positions.map((pos) => (
+        <ul className="absolute top-full left-0 w-full mt-2 border border-gray-300 rounded bg-white shadow z-10 ">
+          {positionMenu.map((pos) => (
             <li
               key={pos}
               className="px-[10px] py-[4px] hover:bg-gray-100 cursor-pointer"

@@ -1,11 +1,10 @@
-import { CoachProps } from "@/app/(route)/draft/page";
+import { CoachInfo } from "@/_types/draftTypes";
 
-interface CoachInfo {
-  coach: CoachProps;
-  currentOrder: number;
-}
-
-export default function CoachCard({ coach, currentOrder }: CoachInfo) {
+export default function CoachCard({
+  coach,
+  currentOrder,
+  handlePlayerDelete,
+}: CoachInfo) {
   return (
     <li
       className={`shadow-xl relative p-4 py-8 rounded-[16px] border-1 border-gray-200 w-[23.5%] bg-white
@@ -22,7 +21,8 @@ export default function CoachCard({ coach, currentOrder }: CoachInfo) {
         ""
       )}
       <div
-        className={`img-box w-[110px] h-[110px] mx-auto border-1 rounded-full bg-[#333] bg-center bg-cover`}
+        className={`img-box w-[110px] h-[110px] mx-auto border-1 rounded-full bg-[#333] bg-center bg-cover
+          ${coach.order === currentOrder - 1 ? "border-4 border-[#f37812]" : ""}`}
         style={{ backgroundImage: `url(${coach.image})` }}
       ></div>
       <h4
@@ -48,7 +48,9 @@ export default function CoachCard({ coach, currentOrder }: CoachInfo) {
               {coach.teamPlayer.map((player, idx) => (
                 <li
                   key={idx}
-                  className="mt-1 border-1 border-gray-200 p-2 rounded text-sm text-gray-500"
+                  className="mt-1 border-1 border-gray-200 p-2 rounded text-sm text-gray-500 cursor-pointer"
+                  onDoubleClick={() => handlePlayerDelete(player.name)}
+                  title="더블클릭시 삭제"
                 >
                   {player.name}
                 </li>
