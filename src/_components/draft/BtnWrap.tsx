@@ -1,10 +1,6 @@
+import { BtnProps } from "@/_types/draftTypes";
 import { FaCheckCircle, FaRandom } from "react-icons/fa";
 import { FaUserMinus } from "react-icons/fa6";
-
-interface BtnProps {
-  handleCoachReset: () => void;
-  handleRandomSelect: () => void;
-}
 
 export default function BtnWrap({
   handleCoachReset,

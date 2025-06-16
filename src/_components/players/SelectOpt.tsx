@@ -1,7 +1,7 @@
 interface SelectOptProps {
   opt: string;
   isSelected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function SelectOpt({

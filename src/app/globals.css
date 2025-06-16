@@ -67,7 +67,7 @@ body {
   @apply bg-[#f5eedd] text-black transition-colors duration-300;
 }
 html.dark body {
-  @apply bg-black text-white;
+  @apply bg-black;
 }
 
 html.modal-open body {

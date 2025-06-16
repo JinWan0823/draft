@@ -62,11 +62,13 @@ export default function Players() {
               }}
             />
           ))}
-          <CustomSelect
-            setSelectedOpt={setSelectedOpt}
-            selectedPosition={selectedPosition}
-            setSelectedPosition={setSelectedPosition}
-          />
+          <div className="w-[160px]">
+            <CustomSelect
+              onSelectExtra={() => setSelectedOpt("")}
+              selectedPosition={selectedPosition}
+              setSelectedPosition={setSelectedPosition}
+            />
+          </div>
         </ul>
 
         <div className="flex items-center">

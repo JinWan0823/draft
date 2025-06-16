@@ -1,19 +1,13 @@
 import { getBadgeColor, renamePosition } from "@/_utill/position";
-import { dummyPlayers } from "../../../dumy";
-import { TeamPlayerProps } from "@/app/(route)/draft/page";
-
-interface PositionProps {
-  position: string;
-  handlePlayerSelect: (player: TeamPlayerProps) => void;
-  isAlreadySelected: (playerName: string) => boolean;
-}
+import { PositionProps } from "@/_types/draftTypes";
 
 export default function PositionCategory({
   position,
   handlePlayerSelect,
   isAlreadySelected,
+  playerList,
 }: PositionProps) {
-  const positionPlayers = dummyPlayers.filter(
+  const positionPlayers = playerList.filter(
     (item) => item.position === position
   );
 

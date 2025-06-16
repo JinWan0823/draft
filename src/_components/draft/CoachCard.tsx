@@ -1,10 +1,4 @@
-import { CoachProps } from "@/app/(route)/draft/page";
-
-interface CoachInfo {
-  coach: CoachProps;
-  currentOrder: number;
-  handlePlayerDelete: (name: string) => void;
-}
+import { CoachInfo } from "@/_types/draftTypes";
 
 export default function CoachCard({
   coach,
