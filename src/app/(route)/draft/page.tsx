@@ -5,10 +5,11 @@ import DraftIntro from "@/_components/draft/DraftIntro";
 import CoachCard from "@/_components/draft/CoachCard";
 import PositionCategory from "@/_components/draft/PositionCategory";
 import BtnWrap from "@/_components/draft/BtnWrap";
-import { FaUserTie } from "react-icons/fa6";
+import { FaPlus, FaUserTie } from "react-icons/fa6";
 import { positionMenu } from "../../../../dumy";
 import useDraft from "@/_hooks/useDraft";
 import CustomSelect from "@/_components/players/CustomSelect";
+import DraftResult from "@/_components/draft/DraftResult";
 
 export default function DraftPage() {
   const {
@@ -28,12 +29,17 @@ export default function DraftPage() {
     setSelectedPosition,
     addPlayer,
     setAddPlayer,
+    draftResult,
+    setDraftResult,
   } = useDraft();
 
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
       <Logo />
       <DraftIntro />
+      {draftResult && (
+        <DraftResult coachList={coachList} setDraftResult={setDraftResult} />
+      )}
 
       <div className="p-4 mt-8 bg-white rounded shadow-xl">
         <h2 className="text-[#f37812] py-4 border-b-1 border-gray-300 flex items-center text-xl font-bold">
@@ -47,13 +53,17 @@ export default function DraftPage() {
             className="p-2 flex-1 rounded text-lg border-1 border-gray-300"
             placeholder="감독 이름 입력"
           />
-          <button type="submit" className="bg-[#f37812] p-4 text-white rounded">
-            + 감독 추가
+          <button
+            type="submit"
+            className="flex items-center bg-[#f37812] p-4 text-white rounded"
+          >
+            <FaPlus className="mr-2" /> 감독 추가
           </button>
         </form>
         <BtnWrap
           handleCoachReset={handleCoachReset}
           handleRandomSelect={handleRandomSelect}
+          setDraftResult={setDraftResult}
         />
         <ul className="flex flex-wrap items-start justify-center mt-4 gap-5">
           {coachList.map((coach, idx) => (
@@ -90,7 +100,7 @@ export default function DraftPage() {
               type="submit"
               className="flex items-center bg-[#f37812] p-2 text-white rounded"
             >
-              + 선수 생성
+              <FaPlus className="mr-2" /> 선수 생성
             </button>
           </div>
         </form>

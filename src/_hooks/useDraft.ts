@@ -15,6 +15,8 @@ export default function useDraft() {
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
   const [addPlayer, setAddPlayer] = useState("");
 
+  const [draftResult, setDraftResult] = useState(false);
+
   useEffect(() => {
     setPlayerList(dummyPlayers);
   }, []);
@@ -31,6 +33,7 @@ export default function useDraft() {
     return softColors[idx];
   };
 
+  //입력 감독 생성
   const handleCoach = () => {
     if (!inputValue.trim()) return;
     if (coachList.some((coach) => coach.name === inputValue.trim())) return;
@@ -55,12 +58,14 @@ export default function useDraft() {
     handleCoach();
   };
 
+  // 감독 초기화
   const handleCoachReset = () => {
     setCoachList([]);
     setCurrentOrder(1);
     setSelectedCoachName(null);
   };
 
+  //감독 랜덤 선택
   const handleRandomSelect = () => {
     if (coachList.length === 0) {
       alert("먼저 감독을 추가해주세요!");
@@ -95,6 +100,7 @@ export default function useDraft() {
     setCurrentOrder((prev) => prev + 1);
   };
 
+  //드래프트 선수 선택
   const handlePlayerSelect = (player: TeamPlayerProps) => {
     if (!selectedCoachName) return;
     const alreadySelected = coachList.some((coach) =>
@@ -121,6 +127,7 @@ export default function useDraft() {
     );
   };
 
+  //선택된 선수 제거
   const handlePlayerDelete = (name: string) => {
     const updateCoachList = coachList.map((coach) => ({
       ...coach,
@@ -129,6 +136,7 @@ export default function useDraft() {
     setCoachList(updateCoachList);
   };
 
+  //입력 선수 추가
   const handleAddPlayer = (e: React.FormEvent) => {
     e.preventDefault();
     const updatePlayers = addPlayer
@@ -168,5 +176,7 @@ export default function useDraft() {
     setSelectedPosition,
     addPlayer,
     setAddPlayer,
+    draftResult,
+    setDraftResult,
   };
 }

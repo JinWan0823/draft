@@ -1,3 +1,5 @@
+import { SetStateAction } from "react";
+
 export interface CoachProps {
   name: string;
   image: string;
@@ -14,6 +16,7 @@ export interface TeamPlayerProps {
 export interface BtnProps {
   handleCoachReset: () => void;
   handleRandomSelect: () => void;
+  setDraftResult: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export interface CoachInfo {

@@ -28,7 +28,7 @@ interface ItemProps {
 
 export default function PlayerDetail({ info, handleModal }: PlayerProps) {
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#333333bf] flex items-center justify-center">
+    <div className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#000000bf] flex items-center justify-center">
       <div className="bg-[#fff] rounded-[20px] max-w-[900px] w-[90%] max-h-[85vh] overflow-y-auto custom-scrollbar">
         <div className="img h-[320px] bg-[#dfdfdf] overflow-hidden relative">
           <Image

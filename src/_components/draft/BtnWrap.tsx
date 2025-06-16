@@ -5,6 +5,7 @@ import { FaUserMinus } from "react-icons/fa6";
 export default function BtnWrap({
   handleCoachReset,
   handleRandomSelect,
+  setDraftResult,
 }: BtnProps) {
   return (
     <div className="flex items-center justify-between mt-2">
@@ -22,7 +23,10 @@ export default function BtnWrap({
           <FaUserMinus className="mr-2" /> 초기화
         </button>
       </div>
-      <button className="flex items-center bg-[#7aadb3] p-2 text-white rounded">
+      <button
+        onClick={() => setDraftResult(true)}
+        className="flex items-center bg-[#7aadb3] p-2 text-white rounded"
+      >
         <FaCheckCircle className="mr-2" />
         최종 팀 확정
       </button>
