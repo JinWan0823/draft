@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ModeBtn from "@/_components/common/ModeBtn";
 import MenuBtn from "@/_components/common/MenuBtn";
+import { AlertProvider } from "@/_context/AlertContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main>{children}</main>
-        <footer></footer>
-        <MenuBtn />
-        <ModeBtn />
+        <AlertProvider>
+          <main>{children}</main>
+          <footer></footer>
+          <MenuBtn />
+          <ModeBtn />
+        </AlertProvider>
       </body>
     </html>
   );
