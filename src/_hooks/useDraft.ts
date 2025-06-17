@@ -159,6 +159,22 @@ export default function useDraft() {
     setAddPlayer("");
   };
 
+  //최종 드래프트 복사
+  const handleCopyResult = () => {
+    if (coachList.length === 0) return;
+
+    const text = coachList.map((coach, idx) => {
+      const teamPlayers = coach.teamPlayer.map((p) => `-${p.name}`).join("\n");
+      return `${idx + 1}.${coach.name}팀 (${coach.teamPlayer.length}명) \n${teamPlayers}\n`;
+    });
+
+    const resultText = `===최종 팀 결과===\n \n${text.join(`\n`)}`;
+
+    navigator.clipboard
+      .writeText(resultText)
+      .then(() => alert("복사에 성공했습니다!"));
+  };
+
   return {
     inputValue,
     setInputValue,
@@ -178,5 +194,6 @@ export default function useDraft() {
     setAddPlayer,
     draftResult,
     setDraftResult,
+    handleCopyResult,
   };
 }

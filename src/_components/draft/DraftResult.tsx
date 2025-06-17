@@ -7,11 +7,13 @@ import { SetStateAction } from "react";
 interface DraftResultProps {
   coachList: CoachProps[];
   setDraftResult: React.Dispatch<SetStateAction<boolean>>;
+  handleCopyResult: () => void;
 }
 
 export default function DraftResult({
   coachList,
   setDraftResult,
+  handleCopyResult,
 }: DraftResultProps) {
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#000000bf] flex items-center justify-center">
@@ -25,7 +27,10 @@ export default function DraftResult({
             <ResultCard key={idx} coach={coach} />
           ))}
         </ul>
-        <button className="flex items-center mx-auto bg-[#f37812] p-2 text-white rounded">
+        <button
+          onClick={handleCopyResult}
+          className="flex items-center mx-auto bg-[#f37812] p-2 text-white rounded"
+        >
           <IoMdCopy className="mr-1 text-2xl" /> 결과 복사
         </button>
         <button
