@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { dummyPlayers, softColors } from "../../dumy";
 import { CoachProps, TeamPlayerProps } from "@/_types/draftTypes";
+import { useAlert } from "@/_context/AlertContext";
 
 export default function useDraft() {
   const [inputValue, setInputValue] = useState("");
@@ -16,6 +17,8 @@ export default function useDraft() {
   const [addPlayer, setAddPlayer] = useState("");
 
   const [draftResult, setDraftResult] = useState(false);
+
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     setPlayerList(dummyPlayers);
@@ -172,7 +175,7 @@ export default function useDraft() {
 
     navigator.clipboard
       .writeText(resultText)
-      .then(() => alert("복사에 성공했습니다!"));
+      .then(() => showAlert("복사에 성공했습니다!"));
   };
 
   return {
