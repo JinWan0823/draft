@@ -31,6 +31,7 @@ export default function DraftPage() {
     setAddPlayer,
     draftResult,
     setDraftResult,
+    handleCopyResult,
   } = useDraft();
 
   return (
@@ -38,7 +39,11 @@ export default function DraftPage() {
       <Logo />
       <DraftIntro />
       {draftResult && (
-        <DraftResult coachList={coachList} setDraftResult={setDraftResult} />
+        <DraftResult
+          coachList={coachList}
+          setDraftResult={setDraftResult}
+          handleCopyResult={handleCopyResult}
+        />
       )}
 
       <div className="p-4 mt-8 bg-white rounded shadow-xl">
