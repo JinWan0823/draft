@@ -287,6 +287,7 @@ export const dummyPlayers = [
 ];
 
 export const positionMenu = [
+  "포지션 선택",
   "스트라이커",
   "윙포워드",
   "센터 미드필더",
