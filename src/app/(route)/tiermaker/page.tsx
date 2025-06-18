@@ -7,7 +7,8 @@ import TierLine from "@/_components/tiermaker/TierLine";
 import useTierMaker from "@/_hooks/useTierMaker";
 
 export default function TierMaker() {
-  const { player, handleDrop, tierLines } = useTierMaker();
+  const { playerList, handleDrop, tierLines, handleReturnDrop } =
+    useTierMaker();
 
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
@@ -26,11 +27,15 @@ export default function TierMaker() {
           <div className="flex items-center justify-between p-2 px-4 bg-[#333] font-bold text-white">
             <p>미분류 선수</p>
             <span className="rounded-[12px] px-2 bg-gray-600">
-              {player.length}
+              {playerList.length}
             </span>
           </div>
-          <div className="p-4 flex flex-wrap max-h-[420px] overflow-y-scroll gap-4 custom-scrollbar">
-            {player.map((p, idx) => (
+          <div
+            onDrop={handleReturnDrop}
+            onDragOver={(e) => e.preventDefault()}
+            className="p-4 flex flex-wrap max-h-[420px] overflow-y-scroll gap-4 custom-scrollbar"
+          >
+            {playerList.map((p, idx) => (
               <TierCard key={idx} playerInfo={p} />
             ))}
           </div>
