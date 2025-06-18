@@ -62,7 +62,7 @@ export default function Players() {
               }}
             />
           ))}
-          <div className="w-[160px]">
+          <div className="w-[160px] mx-[4px]">
             <CustomSelect
               onSelectExtra={() => setSelectedOpt("")}
               selectedPosition={selectedPosition}

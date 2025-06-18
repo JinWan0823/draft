@@ -95,7 +95,7 @@ export default function DraftPage() {
             onChange={(e) => setAddPlayer(e.target.value)}
           />
           <div className="flex items-center">
-            <div className="w-[220px]">
+            <div className="w-[220px] mx-[4px]">
               <CustomSelect
                 selectedPosition={selectedPosition}
                 setSelectedPosition={setSelectedPosition}

@@ -22,10 +22,10 @@ export default function CustomSelect({
   };
 
   return (
-    <div className="relative w-[full] mx-[4px] ">
+    <div className="relative w-[full]">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-[10px] py-[4px] border border-gray-300 rounded bg-white shadow cursor-pointer relative"
+        className="w-full px-2 py-1 border border-gray-300 rounded bg-white shadow cursor-pointer relative"
       >
         {selectedPosition}
         <FaSortDown className="absolute right-[4px] top-1/2 translate-y-[-75%]" />
