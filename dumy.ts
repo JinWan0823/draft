@@ -310,3 +310,5 @@ export const softColors = [
   "#E11D48", // 다홍
   "#3B82F6", // 중간 파랑
 ];
+
+export const tier = ["S", "A", "B", "C", "D", "E"];

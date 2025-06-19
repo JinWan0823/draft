@@ -5,17 +5,19 @@ interface LinePlayerProps {
   players: PlayerProps[];
   onDrop: (e: React.DragEvent) => void;
   onDragOver: (e: React.DragEvent) => void;
+  tier: string;
 }
 
 export default function TierLine({
   players,
   onDrop,
   onDragOver,
+  tier,
 }: LinePlayerProps) {
   return (
     <div className="tier-line w-full flex min-h-[140px] mt-2 rounded-[16px] overflow-hidden border-gray-200 border-1">
       <div className="flex items-center justify-center bg-[#ff7f7f] w-[100px]">
-        <span className="font-bold text-6xl text-white">S</span>
+        <span className="font-bold text-6xl text-white">{tier}</span>
       </div>
       <div
         onDrop={onDrop}
