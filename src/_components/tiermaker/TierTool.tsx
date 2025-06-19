@@ -4,11 +4,15 @@ import { FaDownload, FaMinus, FaPlus } from "react-icons/fa6";
 interface TierToolProps {
   hanldeTierPlus: () => void;
   handdleTierMinus: () => void;
+  handleResetTierMaker: () => void;
+  handleDownTierMaker: () => void;
 }
 
 export default function TierTool({
   hanldeTierPlus,
   handdleTierMinus,
+  handleResetTierMaker,
+  handleDownTierMaker,
 }: TierToolProps) {
   return (
     <div className="p-1 py-2 w-[220px] fixed left-[20px] top-1/2 -translate-y-1/2 bg-white shadow-xl rounded-[20px] border-l-4 border-[#f37812]">
@@ -26,10 +30,16 @@ export default function TierTool({
         >
           <FaMinus className="text-lg mr-2" /> 티어 삭제
         </li>
-        <li className="bg-red-400 mt-1 rounded flex items-center text-white font-bold p-2 px-3 cursor-pointer">
+        <li
+          className="bg-red-400 mt-1 rounded flex items-center text-white font-bold p-2 px-3 cursor-pointer"
+          onClick={handleResetTierMaker}
+        >
           <FaRegTrashAlt className="text-lg mr-2" /> 초기화
         </li>
-        <li className="bg-[#f37812] mt-1 rounded flex items-center text-white font-bold p-2 px-3 cursor-pointer">
+        <li
+          className="bg-[#f37812] mt-1 rounded flex items-center text-white font-bold p-2 px-3 cursor-pointer"
+          onClick={handleDownTierMaker}
+        >
           <FaDownload className="text-lg mr-2" /> 이미지 저장
         </li>
       </ul>

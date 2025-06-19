@@ -24,6 +24,8 @@ export default function TierMaker() {
     handleResetFilter,
     hanldeTierPlus,
     handdleTierMinus,
+    handleResetTierMaker,
+    handleDownTierMaker,
   } = useTierMaker();
 
   return (
@@ -31,20 +33,24 @@ export default function TierMaker() {
       <TierTool
         hanldeTierPlus={hanldeTierPlus}
         handdleTierMinus={handdleTierMinus}
+        handleResetTierMaker={handleResetTierMaker}
+        handleDownTierMaker={handleDownTierMaker}
       />
 
       <Logo />
       <TierIntro />
       <div className="p-4 mt-8 bg-white rounded shadow-xl">
-        {tierLines.map((line, idx) => (
-          <TierLine
-            key={idx}
-            players={line}
-            onDrop={handleDrop(idx)}
-            onDragOver={(e) => e.preventDefault()}
-            tier={tier[idx]}
-          />
-        ))}
+        <div id="capture-tiermaker">
+          {tierLines.map((line, idx) => (
+            <TierLine
+              key={idx}
+              players={line}
+              onDrop={handleDrop(idx)}
+              onDragOver={(e) => e.preventDefault()}
+              tier={tier[idx]}
+            />
+          ))}
+        </div>
 
         <div className="flex items-center gap-4 p-2 mt-8">
           <div className="w-[35%]">

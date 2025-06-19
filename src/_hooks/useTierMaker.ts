@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { dummyPlayers, tier } from "../../dumy";
 import { PlayerProps } from "@/_types/TierMakerTypes";
 import { useAlert } from "@/_context/AlertContext";
+import { toPng } from "html-to-image";
 
 export default function useTierMaker() {
   const [playerList, setPlayerList] = useState<PlayerProps[]>([]);
@@ -122,6 +123,29 @@ export default function useTierMaker() {
   //   });
   // };
 
+  const handleResetTierMaker = () => {
+    if (confirm("티어메이커를 초기화 하시겠습니까?")) {
+      setTierLines([[], [], []]);
+      setFilterPlayerList(playerList);
+      showAlert("티어 메이커를 초기화했습니다.");
+    }
+  };
+
+  const handleDownTierMaker = async () => {
+    const element = document.getElementById("capture-tiermaker");
+    if (!element || playerList.length === filterPlayerList.length) {
+      showAlert("배정된 선수가 없습니다.");
+      return;
+    }
+
+    const dataUrl = await toPng(element);
+
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = "tierList.jpg";
+    link.click();
+  };
+
   return {
     handleDragStart,
     handleDrop,
@@ -136,5 +160,7 @@ export default function useTierMaker() {
     handleResetFilter,
     hanldeTierPlus,
     handdleTierMinus,
+    handleResetTierMaker,
+    handleDownTierMaker,
   };
 }
