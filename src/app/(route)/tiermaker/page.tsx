@@ -5,9 +5,11 @@ import CustomSelect from "@/_components/players/CustomSelect";
 import TierCard from "@/_components/tiermaker/TierCard";
 import TierIntro from "@/_components/tiermaker/TierIntro";
 import TierLine from "@/_components/tiermaker/TierLine";
+import TierTool from "@/_components/tiermaker/TierTool";
 import useTierMaker from "@/_hooks/useTierMaker";
 import { BsPatchExclamation } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
+import { tier } from "../../../../dumy";
 
 export default function TierMaker() {
   const {
@@ -20,21 +22,35 @@ export default function TierMaker() {
     searchValue,
     filterPlayerList,
     handleResetFilter,
+    hanldeTierPlus,
+    handdleTierMinus,
+    handleResetTierMaker,
+    handleDownTierMaker,
   } = useTierMaker();
 
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
+      <TierTool
+        hanldeTierPlus={hanldeTierPlus}
+        handdleTierMinus={handdleTierMinus}
+        handleResetTierMaker={handleResetTierMaker}
+        handleDownTierMaker={handleDownTierMaker}
+      />
+
       <Logo />
       <TierIntro />
       <div className="p-4 mt-8 bg-white rounded shadow-xl">
-        {tierLines.map((line, idx) => (
-          <TierLine
-            key={idx}
-            players={line}
-            onDrop={handleDrop(idx)}
-            onDragOver={(e) => e.preventDefault()}
-          />
-        ))}
+        <div id="capture-tiermaker">
+          {tierLines.map((line, idx) => (
+            <TierLine
+              key={idx}
+              players={line}
+              onDrop={handleDrop(idx)}
+              onDragOver={(e) => e.preventDefault()}
+              tier={tier[idx]}
+            />
+          ))}
+        </div>
 
         <div className="flex items-center gap-4 p-2 mt-8">
           <div className="w-[35%]">
