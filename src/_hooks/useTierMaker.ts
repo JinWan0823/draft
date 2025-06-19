@@ -58,16 +58,26 @@ export default function useTierMaker() {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchValue(value);
+    const result = playerList.filter(
+      (p) =>
+        !tierLines.some((line) => line.some((selected) => selected.id === p.id))
+    );
+
     if (value.trim() === "") {
-      setFilterPlayerList(playerList);
+      setFilterPlayerList(result);
     } else {
-      const filtered = playerList.filter((p) => p.name.includes(value));
+      const filtered = result.filter((p) => p.name.includes(value));
       setFilterPlayerList(filtered);
     }
   };
 
   const handleResetFilter = () => {
-    setFilterPlayerList(playerList);
+    //playerList 전체 플레이어중에 tierLines [][] 배열에 포함되어있지 않은 애들만
+    const result = playerList.filter(
+      (p) =>
+        !tierLines.some((line) => line.some((selected) => selected.id === p.id))
+    );
+    setFilterPlayerList(result);
     setSearchValue("");
     setSelectedPosition("포지션 선택");
   };
