@@ -65,7 +65,13 @@ export default function TierMaker() {
           <div className="flex items-center justify-between p-2 px-4 bg-[#333] font-bold text-white">
             <p>미분류 선수</p>
             <span className="rounded-[12px] px-2 bg-gray-600">
-              {filterPlayerList.length}
+              {
+                filterPlayerList.filter(
+                  (p) =>
+                    selectedPosition === "포지션 선택" ||
+                    p.position === selectedPosition
+                ).length
+              }
             </span>
           </div>
           <div
