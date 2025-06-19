@@ -9,7 +9,7 @@ import TierTool from "@/_components/tiermaker/TierTool";
 import useTierMaker from "@/_hooks/useTierMaker";
 import { BsPatchExclamation } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
-import { tier } from "../../../../dumy";
+import { softColors, tier } from "../../../../dumy";
 
 export default function TierMaker() {
   const {
@@ -48,6 +48,7 @@ export default function TierMaker() {
               onDrop={handleDrop(idx)}
               onDragOver={(e) => e.preventDefault()}
               tier={tier[idx]}
+              bg={softColors[idx]}
             />
           ))}
         </div>

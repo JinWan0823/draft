@@ -6,6 +6,7 @@ interface LinePlayerProps {
   onDrop: (e: React.DragEvent) => void;
   onDragOver: (e: React.DragEvent) => void;
   tier: string;
+  bg: string;
 }
 
 export default function TierLine({
@@ -13,10 +14,14 @@ export default function TierLine({
   onDrop,
   onDragOver,
   tier,
+  bg,
 }: LinePlayerProps) {
   return (
     <div className="tier-line w-full flex min-h-[140px] mt-2 rounded-[16px] overflow-hidden border-gray-200 border-1">
-      <div className="flex items-center justify-center bg-[#ff7f7f] w-[100px]">
+      <div
+        style={{ backgroundColor: bg }}
+        className={`flex items-center justify-center w-[100px]`}
+      >
         <span className="font-bold text-6xl text-white">{tier}</span>
       </div>
       <div
