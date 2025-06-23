@@ -7,7 +7,7 @@ interface MenuProps {
   handleMenuTab: () => void;
 }
 
-const menuList = ["홈", "선수목록", "전술보드", "드래프트", "티어메이커"];
+const menuList = ["홈", "선수목록", "전술보드", "드래프트", "선수 티어메이커"];
 
 export default function Menu({ handleMenuTab }: MenuProps) {
   return (

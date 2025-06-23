@@ -13,7 +13,8 @@ export default function TierIntro() {
           <b className="text-lg">먼저 감독을 추가</b>하고, 선수들을 각
           포지션별로 선택하면 됩니다. <b className="text-lg">더블클릭</b>으로
           선수목록에서 선수를 제외할 수 있습니다. 필요한 선수는 포지션과 이름을
-          입력해 추가해 참여 가능합니다.
+          입력해 추가해 참여 가능합니다. 사이트를 나갔다와도 티어표는 그대로
+          유지됩니다.
         </p>
       </div>
     </div>
