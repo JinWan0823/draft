@@ -12,12 +12,34 @@ export default function useTierMaker() {
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
   const [searchValue, setSearchValue] = useState("");
 
+  const [isInitialLoaded, setIsInitialLoaded] = useState(false);
+
   const { showAlert } = useAlert();
 
   useEffect(() => {
+    const linesData = localStorage.getItem("tierLines");
+    if (linesData) {
+      const lines: PlayerProps[][] = JSON.parse(linesData);
+      setTierLines(lines);
+
+      const filterResult = dummyPlayers.filter(
+        (p) =>
+          !lines.some((line) => line.some((selected) => selected.id === p.id))
+      );
+      setFilterPlayerList(filterResult);
+    } else {
+      setFilterPlayerList(dummyPlayers);
+    }
+
     setPlayerList(dummyPlayers);
-    setFilterPlayerList(dummyPlayers);
+    setIsInitialLoaded(true);
   }, []);
+
+  useEffect(() => {
+    if (isInitialLoaded) {
+      localStorage.setItem("tierLines", JSON.stringify(tierLines));
+    }
+  }, [tierLines, isInitialLoaded]);
 
   const handleDragStart = (player: PlayerProps) => (e: React.DragEvent) => {
     e.dataTransfer.setData("application/json", JSON.stringify(player));
@@ -126,7 +148,7 @@ export default function useTierMaker() {
   const handleResetTierMaker = () => {
     if (confirm("티어메이커를 초기화 하시겠습니까?")) {
       setTierLines([[], [], []]);
-      setFilterPlayerList(playerList);
+      setFilterPlayerList(dummyPlayers);
       showAlert("티어 메이커를 초기화했습니다.");
     }
   };
