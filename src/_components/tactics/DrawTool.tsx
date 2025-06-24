@@ -1,6 +1,5 @@
 import { SetStateAction } from "react";
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
-import { IoIosRefresh } from "react-icons/io";
 
 interface DrawProps {
   redPen: boolean;
@@ -61,9 +60,9 @@ export default function DrawTool({
         >
           <FaPencilAlt className="text-lg mr-2" /> 파란 펜
         </li>
-        <li className="bg-[#dfdfdf] mt-1 rounded flex items-center text-[#333] font-bold p-2 px-3 cursor-pointer">
+        {/* <li className="bg-[#dfdfdf] mt-1 rounded flex items-center text-[#333] font-bold p-2 px-3 cursor-pointer">
           <IoIosRefresh className="text-lg mr-2" /> 되감기
-        </li>
+        </li> */}
         <li
           className="bg-red-600 mt-1 rounded flex items-center text-white font-bold p-2 px-3 cursor-pointer"
           onClick={resetDraw}
