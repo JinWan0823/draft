@@ -5,25 +5,11 @@ import { PiSoccerBallDuotone } from "react-icons/pi";
 import PositionBadge from "./PositionBadge";
 import { IoClose } from "react-icons/io5";
 import CareerList from "./CareerList";
+import { PlayerInfoProps } from "@/_types/playerTypes";
 
 interface PlayerProps {
-  info: ItemProps;
+  info: PlayerInfoProps;
   handleModal: () => void;
-}
-
-interface Achivement {
-  tournament: string;
-  result: string;
-}
-
-interface ItemProps {
-  id: number;
-  name: string;
-  position: string;
-  subPosition: string;
-  note: string;
-  image: string;
-  achievements: Achivement[];
 }
 
 export default function PlayerDetail({ info, handleModal }: PlayerProps) {

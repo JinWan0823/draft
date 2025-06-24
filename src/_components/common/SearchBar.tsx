@@ -1,21 +1,59 @@
+"use client";
+
 import { MdOutlineSearch } from "react-icons/md";
+import PlayerDetail from "../players/PlayerDetail";
+import { useState } from "react";
+import { PlayerInfoProps } from "@/_types/playerTypes";
+import { dummyPlayers } from "../../../dumy";
+import { useAlert } from "@/_context/AlertContext";
 
 export default function SearchBar() {
+  const [modal, setModal] = useState(false);
+  const [playerInfo, setPlayerInfo] = useState<PlayerInfoProps>();
+  const [searchText, setSearchText] = useState("");
+
+  const { showAlert } = useAlert();
+
+  const handleModal = () => {
+    setModal(false);
+    document.documentElement.classList.remove("modal-open");
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const searchPlayer = dummyPlayers.filter((p) => p.name === searchText);
+    if (searchPlayer.length === 0) {
+      showAlert("해당하는 선수를 찾을 수 없습니다.");
+      return;
+    }
+    setPlayerInfo(searchPlayer[0]);
+    setModal(true);
+    document.documentElement.classList.add("modal-open");
+  };
+
   return (
     <>
-      <div className="my-[20px] border-[#f37812] border-3 mx-auto mb-6 w-full max-w-[800px] rounded-full px-[16px] py-[10px] flex">
-        <input
-          type="text"
-          className="w-full outline-none text-xl"
-          placeholder="선수 검색"
-        />
-        <button
-          type="button"
-          className="cursor-pointer text-[#f37812] text-4xl  ml-[4px] text-center"
-        >
-          <MdOutlineSearch />
-        </button>
+      <div className="my-[20px] border-[#f37812] border-3 mx-auto mb-6 w-full max-w-[800px] rounded-full px-[16px] py-[10px]">
+        <form onSubmit={handleSearch} className="w-full flex">
+          <input
+            type="text"
+            className="w-full outline-none text-xl"
+            placeholder="선수 검색"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="cursor-pointer text-[#f37812] text-4xl  ml-[4px] text-center"
+          >
+            <MdOutlineSearch />
+          </button>
+        </form>
       </div>
+      {modal && playerInfo && (
+        <PlayerDetail info={playerInfo} handleModal={handleModal} />
+      )}
     </>
   );
 }
