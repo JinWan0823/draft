@@ -5,14 +5,30 @@ import CustomSelect from "@/_components/players/CustomSelect";
 import PlayerCard from "@/_components/players/PlayerCard";
 import SelectOpt from "@/_components/players/SelectOpt";
 import SearchBar from "@/_components/common/SearchBar";
-import { useState } from "react";
-import { dummyPlayers } from "../../../../dumy";
+import { useEffect, useState } from "react";
 
 import { MdPeople, MdFilterAlt } from "react-icons/md";
+import { PlayerInfoProps } from "@/_types/playerTypes";
 
 export default function Players() {
   const [selectedOpt, setSelectedOpt] = useState("이름순");
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
+
+  const [allPlayers, setAllPlayers] = useState<PlayerInfoProps[]>([]);
+
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        const res = await fetch("/api/player");
+        if (!res.ok) throw new Error("서버 응답 실패");
+        const data = await res.json();
+        setAllPlayers(data);
+      } catch (err) {
+        console.error("선수 데이터 로딩 실패", err);
+      }
+    };
+    fetchPlayers();
+  }, []);
 
   const sortOptions = ["이름순", "포지션순"];
   const positionOrder = [
@@ -26,7 +42,7 @@ export default function Players() {
     "올라운더",
   ];
 
-  const filteredPlayers = dummyPlayers
+  const filteredPlayers = allPlayers
     .filter(
       (player) =>
         selectedPosition === "포지션 선택" ||
@@ -75,7 +91,7 @@ export default function Players() {
           <div className="p-[4px] px-[12px] flex items-center mr-[10px] bg-white rounded">
             <MdPeople className="text-4xl text-[#f37812] mr-[12px]" />
             <div>
-              <span className="font-bold text-2xl">{dummyPlayers.length}</span>
+              <span className="font-bold text-2xl">{allPlayers.length}</span>
               <p className="text-sm leading-3">총 선수</p>
             </div>
           </div>

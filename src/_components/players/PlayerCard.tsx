@@ -40,12 +40,12 @@ export default function PlayerCard({ item }: PlayerProps) {
         <span className="z-[999] absolute bottom-0 right-0 h-[2px] bg-[#333] w-0 transition-all duration-500 ease-in-out delay-300 group-hover:w-full"></span>
         <span className="z-[999] absolute bottom-0 left-0 w-[2px] bg-[#333] h-0 transition-all duration-500 ease-in-out delay-500 group-hover:h-full"></span>
         <div className="text-black dark:text-white">
-          <div className="img-box overflow-hidden relative w-full h-[360px]">
+          <div className="img-box overflow-hidden relative w-full h-[194px]">
             <Image
               src={item.image}
               alt="더미이미지"
-              width={298}
-              height={360}
+              width={292}
+              height={194}
               className="transition-all duration-500 ease-in-out group-hover:scale-125"
             />
             <div className="absolute bottom-[4px] left-[4px]">
