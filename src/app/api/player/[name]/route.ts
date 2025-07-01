@@ -1,23 +1,33 @@
+import { NextRequest } from "next/server";
 import { connectDB } from "@/_lib/mongodb";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { name: string } }
+  req: NextRequest,
+  context: { params: { name: string } }
 ) {
   const client = await connectDB;
   const db = client.db("draft");
 
   try {
-    const player = await db.collection("player").findOne({ name: params.name });
+    const player = await db
+      .collection("player")
+      .findOne({ name: context.params.name });
+
     if (!player) {
-      return Response.json(
-        { message: "선수를 찾을 수 없습니다." },
-        { status: 404 }
+      return new Response(
+        JSON.stringify({ message: "선수를 찾을 수 없습니다." }),
+        { status: 404, headers: { "Content-Type": "application/json" } }
       );
     }
 
-    return Response.json(player);
+    return new Response(JSON.stringify(player), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    return Response.json({ message: error }, { status: 500 });
+    return new Response(JSON.stringify({ message: "서버 에러", error }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
