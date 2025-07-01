@@ -23,8 +23,8 @@ export default function Players() {
         if (!res.ok) throw new Error("서버 응답 실패");
         const data = await res.json();
         setAllPlayers(data);
-      } catch (err) {
-        console.error("선수 데이터 로딩 실패", err);
+      } catch (error) {
+        console.error("선수 데이터 로딩 실패", error);
       }
     };
     fetchPlayers();
