@@ -3,15 +3,14 @@ import { connectDB } from "@/_lib/mongodb";
 
 export async function GET(
   req: NextRequest,
-  context: { params: { name: string } }
+  { params }: { params: Promise<{ name: string }> }
 ) {
   const client = await connectDB;
   const db = client.db("draft");
+  const { name } = await params;
 
   try {
-    const player = await db
-      .collection("player")
-      .findOne({ name: context.params.name });
+    const player = await db.collection("player").findOne({ name: name });
 
     if (!player) {
       return new Response(
