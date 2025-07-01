@@ -5,30 +5,16 @@ import CustomSelect from "@/_components/players/CustomSelect";
 import PlayerCard from "@/_components/players/PlayerCard";
 import SelectOpt from "@/_components/players/SelectOpt";
 import SearchBar from "@/_components/common/SearchBar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { MdPeople, MdFilterAlt } from "react-icons/md";
-import { PlayerInfoProps } from "@/_types/playerTypes";
+import useAllPlayers from "@/_hooks/useAllPlayer";
 
 export default function Players() {
   const [selectedOpt, setSelectedOpt] = useState("이름순");
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
 
-  const [allPlayers, setAllPlayers] = useState<PlayerInfoProps[]>([]);
-
-  useEffect(() => {
-    const fetchPlayers = async () => {
-      try {
-        const res = await fetch("/api/player");
-        if (!res.ok) throw new Error("서버 응답 실패");
-        const data = await res.json();
-        setAllPlayers(data);
-      } catch (error) {
-        console.error("선수 데이터 로딩 실패", error);
-      }
-    };
-    fetchPlayers();
-  }, []);
+  const { allPlayers } = useAllPlayers();
 
   const sortOptions = ["이름순", "포지션순"];
   const positionOrder = [
