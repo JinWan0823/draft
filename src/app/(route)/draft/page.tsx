@@ -10,6 +10,7 @@ import { positionMenu } from "../../../../dumy";
 import useDraft from "@/_hooks/useDraft";
 import CustomSelect from "@/_components/players/CustomSelect";
 import DraftResult from "@/_components/draft/DraftResult";
+import useAllPlayers from "@/_hooks/useAllPlayer";
 
 export default function DraftPage() {
   const {
@@ -24,7 +25,6 @@ export default function DraftPage() {
     handlePlayerDelete,
     handleAddPlayer,
     currentOrder,
-    playerList,
     selectedPosition,
     setSelectedPosition,
     addPlayer,
@@ -33,6 +33,8 @@ export default function DraftPage() {
     setDraftResult,
     handleCopyResult,
   } = useDraft();
+
+  const { allPlayers } = useAllPlayers();
 
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
@@ -111,15 +113,19 @@ export default function DraftPage() {
         </form>
 
         <div className="flex flex-wrap items-start gap-4 my-4">
-          {positionMenu.map((posi, idx) => (
-            <PositionCategory
-              key={idx}
-              position={posi}
-              handlePlayerSelect={handlePlayerSelect}
-              isAlreadySelected={isAlreadySelected}
-              playerList={playerList}
-            />
-          ))}
+          {positionMenu.map((posi, idx) =>
+            idx === 0 ? (
+              ""
+            ) : (
+              <PositionCategory
+                key={idx}
+                position={posi}
+                handlePlayerSelect={handlePlayerSelect}
+                isAlreadySelected={isAlreadySelected}
+                playerList={allPlayers}
+              />
+            )
+          )}
         </div>
       </div>
     </section>
