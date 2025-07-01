@@ -4,7 +4,6 @@ import { MdOutlineSearch } from "react-icons/md";
 import PlayerDetail from "../players/PlayerDetail";
 import { useState } from "react";
 import { PlayerInfoProps } from "@/_types/playerTypes";
-import { dummyPlayers } from "../../../dumy";
 import { useAlert } from "@/_context/AlertContext";
 
 export default function SearchBar() {
@@ -19,18 +18,37 @@ export default function SearchBar() {
     document.documentElement.classList.remove("modal-open");
   };
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      const res = await fetch(`/api/player/${searchText}`);
+      if (!res.ok) {
+        showAlert("해당하는 선수를 찾을 수 없습니다.");
+        throw new Error("선수 로딩 실패");
+      }
 
-    const searchPlayer = dummyPlayers.filter((p) => p.name === searchText);
-    if (searchPlayer.length === 0) {
-      showAlert("해당하는 선수를 찾을 수 없습니다.");
-      return;
+      const data = await res.json();
+      setPlayerInfo(data);
+      setModal(true);
+      setSearchText("");
+      document.documentElement.classList.add("modal-open");
+    } catch (error) {
+      console.error("선수 데이터 로딩 실패", error);
     }
-    setPlayerInfo(searchPlayer[0]);
-    setModal(true);
-    document.documentElement.classList.add("modal-open");
   };
+
+  // const handleSearch = (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   const searchPlayer = dummyPlayers.filter((p) => p.name === searchText);
+  //   if (searchPlayer.length === 0) {
+  //     showAlert("해당하는 선수를 찾을 수 없습니다.");
+  //     return;
+  //   }
+  //   setPlayerInfo(searchPlayer[0]);
+  //   setModal(true);
+  //   document.documentElement.classList.add("modal-open");
+  // };
 
   return (
     <>
