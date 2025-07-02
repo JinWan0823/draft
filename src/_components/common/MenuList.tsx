@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { JSX } from "react";
-import { BsClipboard, BsFillPeopleFill, BsHighlighter } from "react-icons/bs";
+import {
+  BsClipboard,
+  BsFillPeopleFill,
+  BsHighlighter,
+  BsPersonPlusFill,
+} from "react-icons/bs";
 import { FaChalkboardUser } from "react-icons/fa6";
 interface ListProps {
   category: string;
@@ -13,21 +18,15 @@ const categoryToPath: { [key: string]: string } = {
   전술보드: "tactics",
   드래프트: "draft",
   "선수 티어메이커": "tiermaker",
+  "선수 등록": "create",
 };
 
 const categoryToIcon: { [key: string]: JSX.Element } = {
-  "선수 목록": (
-    <BsFillPeopleFill className="text-6xl transition-transform duration-300 ease-in-out group-hover:scale-110" />
-  ),
-  전술보드: (
-    <FaChalkboardUser className="text-6xl transition-transform duration-300 ease-in-out group-hover:scale-110" />
-  ),
-  드래프트: (
-    <BsClipboard className="text-6xl transition-transform duration-300 ease-in-out group-hover:scale-110" />
-  ),
-  "선수 티어메이커": (
-    <BsHighlighter className="text-6xl transition-transform duration-300 ease-in-out group-hover:scale-110" />
-  ),
+  "선수 목록": <BsFillPeopleFill />,
+  전술보드: <FaChalkboardUser />,
+  드래프트: <BsClipboard />,
+  "선수 티어메이커": <BsHighlighter />,
+  "선수 등록": <BsPersonPlusFill />,
 };
 
 export default function MenuList({ category }: ListProps) {
@@ -43,7 +42,9 @@ export default function MenuList({ category }: ListProps) {
         href={`/${path}`}
         className="flex flex-col items-center justify-center w-full h-full group"
       >
-        {IconComponent}
+        <span className="text-6xl transition-transform duration-300 ease-in-out group-hover:scale-110">
+          {IconComponent}
+        </span>
         <p className="text-xl font-bold mt-[10px]">{category}</p>
       </Link>
     </li>
