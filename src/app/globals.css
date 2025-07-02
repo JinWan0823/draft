@@ -62,7 +62,7 @@ button:hover {
   transform: translateY(-4px);
 }
 
-button.none {
+button.none:hover {
   transform: translateY(0px);
 }
 

@@ -14,6 +14,7 @@ interface Achivement {
 }
 
 interface ItemProps {
+  _id: string;
   id: number;
   name: string;
   position: string;
