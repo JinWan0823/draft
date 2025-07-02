@@ -1,29 +1,55 @@
 "use client";
 
+import { useAlert } from "@/_context/AlertContext";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function LoginPage() {
   const [viewPwd, setViewPwd] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { showAlert } = useAlert();
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      username,
+      password,
+    });
+
+    if (res?.error) {
+      showAlert("아이디 또는 비밀번호를 확인하세요.");
+    } else if (res?.ok) {
+      router.push("/");
+    }
+  };
 
   return (
     <section className="w-full h-full min-h-[100vh] flex items-center justify-center">
       <div className="p-4 py-8 w-[98%] max-w-[450px] rounded-[12px] bg-[#fff] shadow-xl">
         <Image src={"/logo.png"} alt="logo" width={700} height={140} />
-        <form className="mt-4">
+        <form className="mt-4" onSubmit={handleSubmit}>
           <div>
             <input
               type="text"
               className="border-1 border-gray-300 w-full mt-2 p-2 outline-[#f37812]"
-              name=""
-              id=""
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="relative mt-2">
             <input
               type={`${viewPwd ? "text" : "password"}`}
               className="border-1 border-gray-300 w-full p-2 outline-[#f37812]"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
               type="button"
