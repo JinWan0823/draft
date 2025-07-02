@@ -4,6 +4,7 @@ import ModeBtn from "@/_components/common/ModeBtn";
 import MenuBtn from "@/_components/common/MenuBtn";
 import { AlertProvider } from "@/_context/AlertContext";
 import SessionProviderWrapper from "./SessionProviderWrapper";
+import AdminBadge from "@/_components/common/AdminBadge";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,6 +25,7 @@ export default function RootLayout({
             <footer></footer>
             <MenuBtn />
             <ModeBtn />
+            <AdminBadge />
           </AlertProvider>
         </SessionProviderWrapper>
       </body>
