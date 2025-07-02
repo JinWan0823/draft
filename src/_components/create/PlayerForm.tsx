@@ -8,8 +8,6 @@ export default function PlayerForm() {
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
   const [selectedSubPosition, setSelectedSubPosition] = useState("포지션 선택");
 
-  const [career, setCareer] = useState<string[]>([]);
-
   return (
     <form className="w-[95%] max-w-[450px] h-[70vh] max-h-[600px] overflow-y-scroll custom-scrollbar mt-4 mx-auto bg-white py-10 px-6 rounded-[20px] shadow-xl">
       <div className="img-box">
