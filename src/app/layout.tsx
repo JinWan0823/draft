@@ -3,6 +3,7 @@ import "./globals.css";
 import ModeBtn from "@/_components/common/ModeBtn";
 import MenuBtn from "@/_components/common/MenuBtn";
 import { AlertProvider } from "@/_context/AlertContext";
+import SessionProviderWrapper from "./SessionProviderWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,12 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AlertProvider>
-          <main>{children}</main>
-          <footer></footer>
-          <MenuBtn />
-          <ModeBtn />
-        </AlertProvider>
+        <SessionProviderWrapper>
+          <AlertProvider>
+            <main>{children}</main>
+            <footer></footer>
+            <MenuBtn />
+            <ModeBtn />
+          </AlertProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
