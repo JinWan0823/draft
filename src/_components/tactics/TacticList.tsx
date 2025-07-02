@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { dummyPlayers } from "../../../dumy";
 import TacticPlayer from "./TacticPlayer";
 import { renamePosition } from "@/_utill/position";
+import useAllPlayers from "@/_hooks/useAllPlayer";
 
 export default function TacticList() {
   const [search, setSearch] = useState("");
 
-  const filteredPlayers = dummyPlayers.filter((item) => {
+  const { allPlayers } = useAllPlayers();
+
+  const filteredPlayers = allPlayers.filter((item) => {
     const lowerSearch = search.toLowerCase();
 
     return (

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { dummyPlayers, tier } from "../../dumy";
+import { tier } from "../../dumy";
 import { PlayerProps } from "@/_types/TierMakerTypes";
 import { useAlert } from "@/_context/AlertContext";
 import { toPng } from "html-to-image";
+import useAllPlayers from "./useAllPlayer";
 
 export default function useTierMaker() {
+  const { allPlayers } = useAllPlayers();
+
   const [playerList, setPlayerList] = useState<PlayerProps[]>([]);
   const [filterPlayerList, setFilterPlayerList] = useState<PlayerProps[]>([]);
 
@@ -22,18 +25,18 @@ export default function useTierMaker() {
       const lines: PlayerProps[][] = JSON.parse(linesData);
       setTierLines(lines);
 
-      const filterResult = dummyPlayers.filter(
+      const filterResult = allPlayers.filter(
         (p) =>
-          !lines.some((line) => line.some((selected) => selected.id === p.id))
+          !lines.some((line) => line.some((selected) => selected._id === p._id))
       );
       setFilterPlayerList(filterResult);
     } else {
-      setFilterPlayerList(dummyPlayers);
+      setFilterPlayerList(allPlayers);
     }
 
-    setPlayerList(dummyPlayers);
+    setPlayerList(allPlayers);
     setIsInitialLoaded(true);
-  }, []);
+  }, [allPlayers]);
 
   useEffect(() => {
     if (isInitialLoaded) {
@@ -52,21 +55,21 @@ export default function useTierMaker() {
 
     setTierLines((prev) => {
       const newUpdated = [...prev].map((line) =>
-        line.filter((p) => p.id !== player.id)
+        line.filter((p) => p._id !== player._id)
       );
       newUpdated[lineIndex] = [...newUpdated[lineIndex], player];
 
       return newUpdated;
     });
 
-    setFilterPlayerList((prev) => prev.filter((p) => p.id !== player.id));
+    setFilterPlayerList((prev) => prev.filter((p) => p._id !== player._id));
   };
 
   const handleReturnDrop = (e: React.DragEvent) => {
     const data = e.dataTransfer.getData("application/json");
     const player = JSON.parse(data);
 
-    if (filterPlayerList.some((p) => p.id === player.id)) return;
+    if (filterPlayerList.some((p) => p._id === player._id)) return;
 
     setFilterPlayerList((prev) => {
       const update = [...prev, player];
@@ -75,7 +78,7 @@ export default function useTierMaker() {
 
     setTierLines((prev) => {
       const update = [...prev].map((line) =>
-        line.filter((p) => p.id !== player.id)
+        line.filter((p) => p._id !== player._id)
       );
       return update;
     });
@@ -86,7 +89,9 @@ export default function useTierMaker() {
     setSearchValue(value);
     const result = playerList.filter(
       (p) =>
-        !tierLines.some((line) => line.some((selected) => selected.id === p.id))
+        !tierLines.some((line) =>
+          line.some((selected) => selected._id === p._id)
+        )
     );
 
     if (value.trim() === "") {
@@ -101,7 +106,9 @@ export default function useTierMaker() {
     //playerList 전체 플레이어중에 tierLines [][] 배열에 포함되어있지 않은 애들만
     const result = playerList.filter(
       (p) =>
-        !tierLines.some((line) => line.some((selected) => selected.id === p.id))
+        !tierLines.some((line) =>
+          line.some((selected) => selected._id === p._id)
+        )
     );
     setFilterPlayerList(result);
     setSearchValue("");
@@ -148,7 +155,7 @@ export default function useTierMaker() {
   const handleResetTierMaker = () => {
     if (confirm("티어메이커를 초기화 하시겠습니까?")) {
       setTierLines([[], [], []]);
-      setFilterPlayerList(dummyPlayers);
+      setFilterPlayerList(allPlayers);
       showAlert("티어 메이커를 초기화했습니다.");
     }
   };

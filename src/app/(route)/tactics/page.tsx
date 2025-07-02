@@ -10,7 +10,7 @@ import DummyPlayer from "@/_components/tactics/DummyPlayer";
 import TacticIntro from "@/_components/tactics/TacticIntro";
 import TacticList from "@/_components/tactics/TacticList";
 import ToolList from "@/_components/tactics/ToolList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 interface PlayerInfo {
   name: string;
@@ -85,10 +85,6 @@ export default function Tactice() {
   const handleDeletePlayer = (name: string) => {
     setPlayers((prev) => prev.filter((p) => p.name !== name));
   };
-
-  useEffect(() => {
-    console.log(dummyPlayers);
-  }, [dummyPlayers]);
 
   return (
     <section className="w-[1100px] mx-auto py-[120px]">
