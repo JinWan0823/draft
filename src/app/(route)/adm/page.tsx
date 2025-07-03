@@ -13,6 +13,7 @@ export default function LoginPage() {
     password,
     setPassword,
     handleSubmit,
+    setRememberId,
   } = useAdm();
   return (
     <section className="w-full h-full min-h-[100vh] flex items-center justify-center">
@@ -44,7 +45,11 @@ export default function LoginPage() {
           </div>
 
           <div className="flex items-center mt-1">
-            <input type="checkbox" name="" id="save-id" />
+            <input
+              type="checkbox"
+              id="save-id"
+              onChange={() => setRememberId((prev) => !prev)}
+            />
             <label htmlFor="save-id" className="text-sm ml-1 text-gray-400">
               아이디 저장
             </label>

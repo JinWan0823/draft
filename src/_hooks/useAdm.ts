@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAlert } from "@/_context/AlertContext";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -7,9 +7,16 @@ export default function useAdm() {
   const [viewPwd, setViewPwd] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberId, setRememberId] = useState(false);
 
   const { showAlert } = useAlert();
   const router = useRouter();
+
+  useEffect(() => {
+    const savedId = localStorage.getItem("savedId");
+
+    if (savedId) setUsername(savedId);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +30,11 @@ export default function useAdm() {
     if (res?.error) {
       showAlert("아이디 또는 비밀번호를 확인하세요.");
     } else if (res?.ok) {
+      if (rememberId) {
+        localStorage.setItem("savedId", username);
+      } else {
+        localStorage.removeItem("savedId");
+      }
       router.push("/");
     }
   };
@@ -35,5 +47,6 @@ export default function useAdm() {
     password,
     setPassword,
     handleSubmit,
+    setRememberId,
   };
 }
