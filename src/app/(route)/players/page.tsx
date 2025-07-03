@@ -5,47 +5,19 @@ import CustomSelect from "@/_components/players/CustomSelect";
 import PlayerCard from "@/_components/players/PlayerCard";
 import SelectOpt from "@/_components/players/SelectOpt";
 import SearchBar from "@/_components/common/SearchBar";
-import { useState } from "react";
-
 import { MdPeople, MdFilterAlt } from "react-icons/md";
-import useAllPlayers from "@/_hooks/useAllPlayer";
+import usePlayers from "@/_hooks/usePlayers";
 
 export default function Players() {
-  const [selectedOpt, setSelectedOpt] = useState("이름순");
-  const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
-
-  const { allPlayers } = useAllPlayers();
-
-  const sortOptions = ["이름순", "포지션순"];
-  const positionOrder = [
-    "스트라이커",
-    "윙포워드",
-    "센터 미드필더",
-    "수비형 미드필더",
-    "수비수",
-    "풀백",
-    "골키퍼",
-    "올라운더",
-  ];
-
-  const filteredPlayers = allPlayers
-    .filter(
-      (player) =>
-        selectedPosition === "포지션 선택" ||
-        player.position === selectedPosition
-    )
-    .sort((a, b) => {
-      if (selectedOpt === "이름순") {
-        return a.name.localeCompare(b.name, "ko"); // 한글 이름 정렬
-      }
-      if (selectedOpt === "포지션순") {
-        const aIndex = positionOrder.indexOf(a.position);
-        const bIndex = positionOrder.indexOf(b.position);
-        return aIndex - bIndex;
-      }
-      return 0;
-    });
-
+  const {
+    sortOptions,
+    setSelectedOpt,
+    setSelectedPosition,
+    filteredPlayers,
+    selectedOpt,
+    selectedPosition,
+    allPlayers,
+  } = usePlayers();
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
       <Logo />

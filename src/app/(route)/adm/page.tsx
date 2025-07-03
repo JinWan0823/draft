@@ -1,36 +1,19 @@
 "use client";
 
-import { useAlert } from "@/_context/AlertContext";
-import { signIn } from "next-auth/react";
+import useAdm from "@/_hooks/useAdm";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function LoginPage() {
-  const [viewPwd, setViewPwd] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const { showAlert } = useAlert();
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const res = await signIn("credentials", {
-      redirect: false,
-      username,
-      password,
-    });
-
-    if (res?.error) {
-      showAlert("아이디 또는 비밀번호를 확인하세요.");
-    } else if (res?.ok) {
-      router.push("/");
-    }
-  };
-
+  const {
+    viewPwd,
+    setViewPwd,
+    username,
+    setUsername,
+    password,
+    setPassword,
+    handleSubmit,
+  } = useAdm();
   return (
     <section className="w-full h-full min-h-[100vh] flex items-center justify-center">
       <div className="p-4 py-8 w-[98%] max-w-[450px] rounded-[12px] bg-[#fff] shadow-xl">
