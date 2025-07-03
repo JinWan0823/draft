@@ -37,19 +37,6 @@ export default function SearchBar() {
     }
   };
 
-  // const handleSearch = (e: React.FormEvent) => {
-  //   e.preventDefault();
-
-  //   const searchPlayer = dummyPlayers.filter((p) => p.name === searchText);
-  //   if (searchPlayer.length === 0) {
-  //     showAlert("해당하는 선수를 찾을 수 없습니다.");
-  //     return;
-  //   }
-  //   setPlayerInfo(searchPlayer[0]);
-  //   setModal(true);
-  //   document.documentElement.classList.add("modal-open");
-  // };
-
   return (
     <>
       <div className="my-[20px] border-[#f37812] border-3 mx-auto mb-6 w-full max-w-[800px] rounded-full px-[16px] py-[10px]">
