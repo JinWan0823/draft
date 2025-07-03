@@ -31,7 +31,7 @@ export default function CustomSelect({
         <FaSortDown className="absolute right-[4px] top-1/2 translate-y-[-75%]" />
       </div>
       {isOpen && (
-        <ul className="absolute top-full left-0 w-full mt-2 border border-gray-300 rounded bg-white shadow z-10 ">
+        <ul className="absolute top-full left-0 w-full max-h-[200px] overflow-y-scroll mt-2 border border-gray-300 rounded bg-white shadow z-10 ">
           {positionMenu.map((pos) => (
             <li
               key={pos}
