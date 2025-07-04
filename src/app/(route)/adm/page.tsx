@@ -13,6 +13,7 @@ export default function LoginPage() {
     password,
     setPassword,
     handleSubmit,
+    rememberId,
     setRememberId,
   } = useAdm();
   return (
@@ -49,6 +50,7 @@ export default function LoginPage() {
               type="checkbox"
               id="save-id"
               onChange={() => setRememberId((prev) => !prev)}
+              checked={rememberId}
             />
             <label htmlFor="save-id" className="text-sm ml-1 text-gray-400">
               아이디 저장
