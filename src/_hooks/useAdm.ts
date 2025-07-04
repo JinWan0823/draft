@@ -15,7 +15,10 @@ export default function useAdm() {
   useEffect(() => {
     const savedId = localStorage.getItem("savedId");
 
-    if (savedId) setUsername(savedId);
+    if (savedId) {
+      setUsername(savedId);
+      setRememberId(true);
+    }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,6 +50,7 @@ export default function useAdm() {
     password,
     setPassword,
     handleSubmit,
+    rememberId,
     setRememberId,
   };
 }
