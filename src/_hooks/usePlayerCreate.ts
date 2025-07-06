@@ -1,6 +1,6 @@
 import { useAlert } from "@/_context/AlertContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function usePlayerCreate() {
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
@@ -10,6 +10,7 @@ export default function usePlayerCreate() {
   const [playerInfo, setPlayerInfo] = useState("");
 
   const [imageFile, setImageFile] = useState<File>();
+  const [preview, setPreview] = useState<string>("/team1.png");
 
   const { showAlert } = useAlert();
   const router = useRouter();
@@ -36,6 +37,17 @@ export default function usePlayerCreate() {
       setImageFile(file);
     }
   };
+
+  useEffect(() => {
+    if (!imageFile) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreview(reader.result as string);
+    };
+
+    reader.readAsDataURL(imageFile);
+  }, [imageFile]);
 
   const handlePlayerCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,5 +105,6 @@ export default function usePlayerCreate() {
     setPlayerInfo,
     handlePlayerCreate,
     handleChangeFile,
+    preview,
   };
 }
