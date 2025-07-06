@@ -43,7 +43,7 @@ export default function PlayerCard({ item }: PlayerProps) {
         <div className="text-black dark:text-white">
           <div className="img-box overflow-hidden relative w-full h-[194px]">
             <Image
-              src={item.image}
+              src={item.image || "/team1.png"}
               alt="더미이미지"
               width={292}
               height={194}

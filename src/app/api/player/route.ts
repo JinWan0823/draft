@@ -80,7 +80,6 @@ export async function POST(req: NextRequest) {
     Key: fileName,
     Body: buffer,
     ContentType: file.type,
-    ACL: "public-read",
   });
 
   await s3.send(uploadCommand);
