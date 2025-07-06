@@ -20,6 +20,7 @@ export default function PlayerForm() {
     playerInfo,
     setPlayerInfo,
     handlePlayerCreate,
+    handleChangeFile,
   } = usePlayerCreate();
 
   return (
@@ -29,7 +30,7 @@ export default function PlayerForm() {
     >
       <div className="img-box">
         <div className="w-[120px] h-[140px] bg-[#333] rounded"></div>
-        <input type="file" />
+        <input type="file" accept="image/*" onChange={handleChangeFile} />
       </div>
 
       <div className="mt-2">

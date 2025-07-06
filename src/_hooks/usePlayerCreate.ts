@@ -9,6 +9,8 @@ export default function usePlayerCreate() {
   const [playerName, setPlayerName] = useState("");
   const [playerInfo, setPlayerInfo] = useState("");
 
+  const [imageFile, setImageFile] = useState<File>();
+
   const { showAlert } = useAlert();
   const router = useRouter();
 
@@ -28,25 +30,37 @@ export default function usePlayerCreate() {
     setCareerArr(newArr);
   };
 
+  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+    }
+  };
+
   const handlePlayerCreate = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!playerName || !selectedPosition) {
+    if (!playerName || selectedPosition === "포지션 선택") {
       showAlert("선수이름과 포지션은 필수입니다!");
       return;
     }
+
+    const formData = new FormData();
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+    formData.append("name", playerName);
+    formData.append("position", selectedPosition);
+    formData.append("subPosition", selectedSubPosition);
+    formData.append("note", playerInfo);
+
+    careerArr.forEach((career) => {
+      formData.append("achievements", career); // 배열 처리
+    });
+
     try {
       const response = await fetch("/api/player", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: playerName,
-          position: selectedPosition,
-          subPosition: selectedSubPosition,
-          playerInfo: playerInfo,
-          career: careerArr,
-        }),
+        body: formData,
       });
 
       if (!response.ok) {
@@ -78,5 +92,6 @@ export default function usePlayerCreate() {
     playerInfo,
     setPlayerInfo,
     handlePlayerCreate,
+    handleChangeFile,
   };
 }
