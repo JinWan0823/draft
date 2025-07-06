@@ -4,6 +4,7 @@ import CustomSelect from "../players/CustomSelect";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import CareerInput from "./CareerInput";
 import usePlayerCreate from "@/_hooks/usePlayerCreate";
+import Image from "next/image";
 
 export default function PlayerForm() {
   const {
@@ -21,6 +22,7 @@ export default function PlayerForm() {
     setPlayerInfo,
     handlePlayerCreate,
     handleChangeFile,
+    preview,
   } = usePlayerCreate();
 
   return (
@@ -28,9 +30,30 @@ export default function PlayerForm() {
       onSubmit={handlePlayerCreate}
       className="w-[95%] max-w-[450px] h-[70vh] max-h-[600px] overflow-y-scroll custom-scrollbar mt-4 mx-auto bg-white py-10 px-6 rounded-[20px] shadow-xl"
     >
-      <div className="img-box">
-        <div className="w-[120px] h-[140px] bg-[#333] rounded"></div>
-        <input type="file" accept="image/*" onChange={handleChangeFile} />
+      <div className="img-box flex flex-col justify-center items-center">
+        <div className="w-[140px] h-[140px] overflow-hidden border-4 border-gray-300 bg-[#333] rounded-full">
+          <Image
+            src={preview}
+            width={140}
+            height={140}
+            alt="프로필 이미지"
+            className="object-cover w-full h-full rounded-full"
+            draggable="false"
+          />
+        </div>
+        <label
+          className="text-center inline-block px-2 rounded mt-2 border-2 border-[#f37812] cursor-pointer text-[#f37812] font-bold"
+          htmlFor="image-input"
+        >
+          프로필 이미지 등록
+        </label>
+        <input
+          id="image-input"
+          className="hidden"
+          type="file"
+          accept="image/*"
+          onChange={handleChangeFile}
+        />
       </div>
 
       <div className="mt-2">
