@@ -23,12 +23,13 @@ export default function PlayerForm({ mode }: { mode: "create" | "edit" }) {
     setPlayerInfo,
     handleChangeFile,
     handlePlayerCreate,
+    handlePlayerUpdate,
     preview,
   } = usePlayerCreate(mode);
 
   return (
     <form
-      onSubmit={handlePlayerCreate}
+      onSubmit={mode === "edit" ? handlePlayerUpdate : handlePlayerCreate}
       className="w-[95%] max-w-[450px] h-[70vh] max-h-[600px] overflow-y-scroll custom-scrollbar mt-4 mx-auto bg-white py-10 px-6 rounded-[20px] shadow-xl"
     >
       <div className="img-box flex flex-col justify-center items-center">

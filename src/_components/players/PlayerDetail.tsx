@@ -6,7 +6,7 @@ import PositionBadge from "./PositionBadge";
 import { IoClose } from "react-icons/io5";
 import CareerList from "./CareerList";
 import { PlayerInfoProps } from "@/_types/playerTypes";
-import Link from "next/link";
+import PlayerUpdateBtn from "./PlayerUpdateBtn";
 
 interface PlayerProps {
   info: PlayerInfoProps;
@@ -37,14 +37,7 @@ export default function PlayerDetail({ info, handleModal }: PlayerProps) {
           </button>
 
           <div className="flex gap-2 absolute right-[16px] bottom-[16px]">
-            <Link href={`/update/${info._id}`}>
-              <button
-                type="button"
-                className="close-btn  text-sm bg-[#fff] font-bold py-[2px] px-[10px] rounded-[8px] flex items-center"
-              >
-                수정 <IoClose />
-              </button>
-            </Link>
+            <PlayerUpdateBtn playerId={info._id} />
             <button
               type="button"
               className="close-btn text-sm bg-[#fff] font-bold py-[2px] px-[10px] rounded-[8px] flex items-center"
