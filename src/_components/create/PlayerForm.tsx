@@ -6,7 +6,7 @@ import CareerInput from "./CareerInput";
 import usePlayerCreate from "@/_hooks/usePlayerCreate";
 import Image from "next/image";
 
-export default function PlayerForm() {
+export default function PlayerForm({ mode }: { mode: "create" | "edit" }) {
   const {
     selectedPosition,
     setSelectedPosition,
@@ -20,14 +20,14 @@ export default function PlayerForm() {
     setPlayerName,
     playerInfo,
     setPlayerInfo,
-    handlePlayerCreate,
+    handlePlayerUpdate,
     handleChangeFile,
     preview,
-  } = usePlayerCreate();
+  } = usePlayerCreate(mode);
 
   return (
     <form
-      onSubmit={handlePlayerCreate}
+      onSubmit={handlePlayerUpdate}
       className="w-[95%] max-w-[450px] h-[70vh] max-h-[600px] overflow-y-scroll custom-scrollbar mt-4 mx-auto bg-white py-10 px-6 rounded-[20px] shadow-xl"
     >
       <div className="img-box flex flex-col justify-center items-center">

@@ -21,7 +21,7 @@ export default function SearchBar() {
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(`/api/player/${searchText}`);
+      const res = await fetch(`/api/player/name/${searchText}`);
       if (!res.ok) {
         showAlert("해당하는 선수를 찾을 수 없습니다.");
         throw new Error("선수 로딩 실패");

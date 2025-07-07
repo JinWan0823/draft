@@ -1,8 +1,9 @@
 import { useAlert } from "@/_context/AlertContext";
-import { useRouter } from "next/navigation";
+import { PlayerInfoProps } from "@/_types/playerTypes";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function usePlayerCreate() {
+export default function usePlayerCreate(mode: "create" | "edit") {
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
   const [selectedSubPosition, setSelectedSubPosition] = useState("포지션 선택");
   const [careerArr, setCareerArr] = useState<string[]>([""]);
@@ -14,6 +15,7 @@ export default function usePlayerCreate() {
 
   const { showAlert } = useAlert();
   const router = useRouter();
+  const { id } = useParams();
 
   const addCareerInput = () => {
     setCareerArr((prev) => [...prev, ""]);
@@ -90,6 +92,42 @@ export default function usePlayerCreate() {
     }
   };
 
+  //수정모드
+  const setInitialData = (playerData: PlayerInfoProps) => {
+    setPlayerName(playerData.name);
+    setSelectedPosition(playerData.position);
+    setSelectedSubPosition(playerData.subPosition);
+    setPlayerInfo(playerData.note);
+    setCareerArr(
+      playerData.achievements.map((item) => {
+        if (typeof item === "string") return item;
+        return `${item.tournament} - ${item.result}`;
+      })
+    );
+    setPreview(playerData.image);
+  };
+
+  //수정모드 데이터 조회
+  useEffect(() => {
+    const fetchPlayerData = async () => {
+      try {
+        const res = await fetch(`/api/player/id/${id}`);
+        const data = await res.json();
+        setInitialData(data);
+      } catch (err) {
+        console.error("선수 데이터 조회 실패", err);
+        showAlert("선수 정보를 불러오지 못했습니다.");
+      }
+    };
+
+    if (mode === "edit") {
+      fetchPlayerData();
+    }
+  }, []);
+
+  //수정모드 폼 전송
+  const handlePlayerUpdate = () => {};
+
   return {
     selectedPosition,
     setSelectedPosition,
@@ -106,5 +144,6 @@ export default function usePlayerCreate() {
     handlePlayerCreate,
     handleChangeFile,
     preview,
+    handlePlayerUpdate,
   };
 }
