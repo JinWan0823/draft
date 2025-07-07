@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function CreatePage() {
+export default function UpdatePage() {
   const { status } = useSession();
   const { showAlert } = useAlert();
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function CreatePage() {
   useEffect(() => {
     if (status === "unauthenticated") {
       showAlert("로그인이 필요합니다.");
-      router.replace("/adm"); // history 스택에 남기지 않기위해 push 대신 사용
+      router.replace("/adm");
     }
   }, [status]);
 
@@ -26,7 +26,7 @@ export default function CreatePage() {
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
       <Logo />
-      <PlayerForm mode="create" />
+      <PlayerForm mode={"edit"} />
     </section>
   );
 }

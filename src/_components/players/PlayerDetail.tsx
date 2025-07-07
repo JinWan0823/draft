@@ -6,6 +6,7 @@ import PositionBadge from "./PositionBadge";
 import { IoClose } from "react-icons/io5";
 import CareerList from "./CareerList";
 import { PlayerInfoProps } from "@/_types/playerTypes";
+import Link from "next/link";
 
 interface PlayerProps {
   info: PlayerInfoProps;
@@ -16,7 +17,7 @@ export default function PlayerDetail({ info, handleModal }: PlayerProps) {
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#000000bf] flex items-center justify-center">
       <div className="bg-[#fff] rounded-[20px] max-w-[900px] w-[90%] max-h-[85vh] overflow-y-auto custom-scrollbar">
-        <div className="img h-[320px] bg-[#dfdfdf] overflow-hidden relative">
+        <div className="h-[320px] bg-[#dfdfdf] overflow-hidden relative">
           <Image
             src={info.image}
             alt="더미이미지"
@@ -34,6 +35,23 @@ export default function PlayerDetail({ info, handleModal }: PlayerProps) {
           >
             닫기 <IoClose />
           </button>
+
+          <div className="flex gap-2 absolute right-[16px] bottom-[16px]">
+            <Link href={`/update/${info._id}`}>
+              <button
+                type="button"
+                className="close-btn  text-sm bg-[#fff] font-bold py-[2px] px-[10px] rounded-[8px] flex items-center"
+              >
+                수정 <IoClose />
+              </button>
+            </Link>
+            <button
+              type="button"
+              className="close-btn text-sm bg-[#fff] font-bold py-[2px] px-[10px] rounded-[8px] flex items-center"
+            >
+              삭제 <IoClose />
+            </button>
+          </div>
         </div>
 
         <div className="p-[16px] py-[24px]">
