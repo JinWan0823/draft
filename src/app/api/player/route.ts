@@ -53,7 +53,9 @@ export async function POST(req: NextRequest) {
   const position = formData.get("position")?.toString();
   const subPosition = formData.get("subPosition")?.toString();
   const playerInfo = formData.get("note")?.toString();
-  const career = formData.getAll("achievements");
+
+  const careerJson = formData.get("achievements")?.toString();
+  const career = careerJson ? JSON.parse(careerJson) : [];
 
   if (!file || !file.type.startsWith("image/")) {
     return Response.json(
