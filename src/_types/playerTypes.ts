@@ -9,7 +9,7 @@ export interface PlayerInfoProps {
   achievements: Achivement[];
 }
 
-interface Achivement {
+export interface Achivement {
   tournament: string;
   result: string;
 }

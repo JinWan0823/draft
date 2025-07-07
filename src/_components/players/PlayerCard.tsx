@@ -3,14 +3,10 @@ import PositionBadge from "./PositionBadge";
 import PlayerCareer from "./PlayerCareer";
 import PlayerDetail from "./PlayerDetail";
 import { useState } from "react";
+import { Achivement } from "@/_types/playerTypes";
 
 interface PlayerProps {
   item: ItemProps;
-}
-
-interface Achivement {
-  tournament: string;
-  result: string;
 }
 
 interface ItemProps {

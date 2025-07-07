@@ -15,19 +15,20 @@ export default function PlayerForm({ mode }: { mode: "create" | "edit" }) {
     careerArr,
     addCareerInput,
     removeCareerInput,
-    handleCareerChange,
+    handleTournamentChange,
+    handleCareerRsultChange,
     playerName,
     setPlayerName,
     playerInfo,
     setPlayerInfo,
-    handlePlayerUpdate,
     handleChangeFile,
+    handlePlayerCreate,
     preview,
   } = usePlayerCreate(mode);
 
   return (
     <form
-      onSubmit={handlePlayerUpdate}
+      onSubmit={handlePlayerCreate}
       className="w-[95%] max-w-[450px] h-[70vh] max-h-[600px] overflow-y-scroll custom-scrollbar mt-4 mx-auto bg-white py-10 px-6 rounded-[20px] shadow-xl"
     >
       <div className="img-box flex flex-col justify-center items-center">
@@ -108,7 +109,8 @@ export default function PlayerForm({ mode }: { mode: "create" | "edit" }) {
             key={idx}
             idx={idx}
             value={career}
-            onChange={(e) => handleCareerChange(idx, e.target.value)}
+            handleTournamentChange={handleTournamentChange}
+            handleCareerRsultChange={handleCareerRsultChange}
           />
         ))}
       </div>

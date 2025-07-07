@@ -1,12 +1,17 @@
 import { useAlert } from "@/_context/AlertContext";
-import { PlayerInfoProps } from "@/_types/playerTypes";
+import { Achivement, PlayerInfoProps } from "@/_types/playerTypes";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function usePlayerCreate(mode: "create" | "edit") {
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
   const [selectedSubPosition, setSelectedSubPosition] = useState("포지션 선택");
-  const [careerArr, setCareerArr] = useState<string[]>([""]);
+  const [careerArr, setCareerArr] = useState<Achivement[]>([
+    {
+      tournament: "",
+      result: "",
+    },
+  ]);
   const [playerName, setPlayerName] = useState("");
   const [playerInfo, setPlayerInfo] = useState("");
 
@@ -18,7 +23,7 @@ export default function usePlayerCreate(mode: "create" | "edit") {
   const { id } = useParams();
 
   const addCareerInput = () => {
-    setCareerArr((prev) => [...prev, ""]);
+    setCareerArr((prev) => [...prev, { tournament: "", result: "" }]);
   };
 
   const removeCareerInput = () => {
@@ -27,9 +32,15 @@ export default function usePlayerCreate(mode: "create" | "edit") {
     }
   };
 
-  const handleCareerChange = (idx: number, value: string) => {
+  const handleTournamentChange = (idx: number, value: string) => {
     const newArr = [...careerArr];
-    newArr[idx] = value;
+    newArr[idx].tournament = value;
+    setCareerArr(newArr);
+  };
+
+  const handleCareerRsultChange = (idx: number, value: string) => {
+    const newArr = [...careerArr];
+    newArr[idx].result = value;
     setCareerArr(newArr);
   };
 
@@ -66,10 +77,7 @@ export default function usePlayerCreate(mode: "create" | "edit") {
     formData.append("position", selectedPosition);
     formData.append("subPosition", selectedSubPosition);
     formData.append("note", playerInfo);
-
-    careerArr.forEach((career) => {
-      formData.append("achievements", career); // 배열 처리
-    });
+    formData.append("achievements", JSON.stringify(careerArr));
 
     try {
       const response = await fetch("/api/player", {
@@ -98,12 +106,7 @@ export default function usePlayerCreate(mode: "create" | "edit") {
     setSelectedPosition(playerData.position);
     setSelectedSubPosition(playerData.subPosition);
     setPlayerInfo(playerData.note);
-    setCareerArr(
-      playerData.achievements.map((item) => {
-        if (typeof item === "string") return item;
-        return `${item.tournament} - ${item.result}`;
-      })
-    );
+    setCareerArr(playerData.achievements);
     setPreview(playerData.image);
   };
 
@@ -136,7 +139,8 @@ export default function usePlayerCreate(mode: "create" | "edit") {
     careerArr,
     addCareerInput,
     removeCareerInput,
-    handleCareerChange,
+    handleTournamentChange,
+    handleCareerRsultChange,
     playerName,
     setPlayerName,
     playerInfo,
