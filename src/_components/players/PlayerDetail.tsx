@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import CareerList from "./CareerList";
 import { PlayerInfoProps } from "@/_types/playerTypes";
 import PlayerUpdateBtn from "./PlayerUpdateBtn";
-import { FaRegTrashAlt } from "react-icons/fa";
+import PlayerDeleteBtn from "./PlayerDeleteBtn";
 
 interface PlayerProps {
   info: PlayerInfoProps;
@@ -39,12 +39,7 @@ export default function PlayerDetail({ info, handleModal }: PlayerProps) {
 
           <div className="flex gap-1 absolute right-[16px] bottom-[16px]">
             <PlayerUpdateBtn playerId={info._id} />
-            <button
-              type="button"
-              className="close-btn text-sm bg-red-600 text-white font-bold px-3 py-1 rounded-[8px] flex items-center"
-            >
-              삭제 <FaRegTrashAlt className="ml-1" />
-            </button>
+            <PlayerDeleteBtn playerId={info._id} />
           </div>
         </div>
 
