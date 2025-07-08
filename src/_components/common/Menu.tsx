@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Logo from "./Logo";
 import { IoClose } from "react-icons/io5";
 import MenuLi from "./MenuLi";
+import { useSession } from "next-auth/react";
 
 interface MenuProps {
   handleMenuTab: () => void;
@@ -10,6 +11,8 @@ interface MenuProps {
 const menuList = ["홈", "선수목록", "전술보드", "드래프트", "선수 티어메이커"];
 
 export default function Menu({ handleMenuTab }: MenuProps) {
+  const { data: session } = useSession();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -37,6 +40,12 @@ export default function Menu({ handleMenuTab }: MenuProps) {
           {menuList.map((item, idx) => (
             <MenuLi key={idx} handleMenuTab={handleMenuTab} menu={item} />
           ))}
+
+          {session?.user ? (
+            <MenuLi handleMenuTab={handleMenuTab} menu={"선수등록"} />
+          ) : (
+            ""
+          )}
         </ul>
       </motion.div>
     </motion.div>

@@ -58,36 +58,41 @@ export async function POST(req: NextRequest) {
   const careerJson = formData.get("achievements")?.toString();
   const career = careerJson ? JSON.parse(careerJson) : [];
 
-  if (!file || !file.type.startsWith("image/")) {
-    return Response.json(
-      { message: "이미지 파일만 업로드 가능합니다." },
-      { status: 400 }
-    );
+  let imageUrl = "";
+
+  if (file) {
+    if (!file.type.startsWith("image/")) {
+      return Response.json(
+        { message: "이미지 파일만 업로드 가능합니다." },
+        { status: 400 }
+      );
+    }
+
+    //s3 업로드
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const s3 = new S3Client({
+      region: "ap-northeast-2",
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      },
+    });
+    const fileName = `${uuidv4()}-${file.name}`;
+    const bucketName = "draft-player-image";
+
+    const uploadCommand = new PutObjectCommand({
+      Bucket: bucketName,
+      Key: fileName,
+      Body: buffer,
+      ContentType: file.type,
+    });
+
+    await s3.send(uploadCommand);
+
+    imageUrl = `https://${bucketName}.s3.amazonaws.com/${fileName}`;
   }
-  //s3 업로드
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-
-  const s3 = new S3Client({
-    region: "ap-northeast-2",
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-    },
-  });
-  const fileName = `${uuidv4()}-${file.name}`;
-  const bucketName = "draft-player-image";
-
-  const uploadCommand = new PutObjectCommand({
-    Bucket: bucketName,
-    Key: fileName,
-    Body: buffer,
-    ContentType: file.type,
-  });
-
-  await s3.send(uploadCommand);
-
-  const imageUrl = `https://${bucketName}.s3.amazonaws.com/${fileName}`;
 
   const client = await connectDB;
   const db = client.db("draft");

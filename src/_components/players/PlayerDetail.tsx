@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 import CareerList from "./CareerList";
 import { PlayerInfoProps } from "@/_types/playerTypes";
 import PlayerUpdateBtn from "./PlayerUpdateBtn";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 interface PlayerProps {
   info: PlayerInfoProps;
@@ -19,8 +20,8 @@ export default function PlayerDetail({ info, handleModal }: PlayerProps) {
       <div className="bg-[#fff] rounded-[20px] max-w-[900px] w-[90%] max-h-[85vh] overflow-y-auto custom-scrollbar">
         <div className="h-[320px] bg-[#dfdfdf] overflow-hidden relative">
           <Image
-            src={info.image}
-            alt="더미이미지"
+            src={info.image || "/team1.png"}
+            alt="선수 프로필"
             width={900}
             height={320}
             className="w-full h-full object-cover"
@@ -36,13 +37,13 @@ export default function PlayerDetail({ info, handleModal }: PlayerProps) {
             닫기 <IoClose />
           </button>
 
-          <div className="flex gap-2 absolute right-[16px] bottom-[16px]">
+          <div className="flex gap-1 absolute right-[16px] bottom-[16px]">
             <PlayerUpdateBtn playerId={info._id} />
             <button
               type="button"
-              className="close-btn text-sm bg-[#fff] font-bold py-[2px] px-[10px] rounded-[8px] flex items-center"
+              className="close-btn text-sm bg-red-600 text-white font-bold px-3 py-1 rounded-[8px] flex items-center"
             >
-              삭제 <IoClose />
+              삭제 <FaRegTrashAlt className="ml-1" />
             </button>
           </div>
         </div>
