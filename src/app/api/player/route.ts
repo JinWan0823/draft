@@ -21,32 +21,6 @@ export async function GET() {
   }
 }
 
-// export async function POST(req: NextRequest) {
-//   const client = await connectDB;
-//   const db = client.db("draft");
-
-// try {
-//   const body = await req.json();
-//   const { name, position, subPosition, playerInfo, career } = body;
-
-//   if (!name || !position) {
-//     return Response.json({ message: "필수 항목 누락" }, { status: 400 });
-//   }
-
-//   const res = await db.collection("player").insertOne({
-//     name: name,
-//     position: position,
-//     subPosition: subPosition,
-//     note: playerInfo,
-//     achievements: career,
-//   });
-
-//   return Response.json(res, { status: 201 });
-// } catch (err) {
-//   return Response.json({ message: err }, { status: 500 });
-// }
-// }
-
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
   const file = formData.get("image") as File;
@@ -182,6 +156,41 @@ export async function PUT(req: NextRequest) {
     );
 
     return Response.json(result, { status: 200 });
+  } catch (err) {
+    return Response.json({ message: err }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const _id = searchParams.get("_id");
+
+  if (!_id) {
+    return Response.json(
+      { message: "MongoDB Id가 필요합니다." },
+      { status: 400 }
+    );
+  }
+
+  const client = await connectDB;
+  const db = client.db("draft");
+
+  try {
+    const result = await db
+      .collection("player")
+      .deleteOne({ _id: new ObjectId(_id) });
+
+    if (result.deletedCount === 0) {
+      return Response.json(
+        { message: "해당 선수를 찾을 수 없습니다." },
+        { status: 404 }
+      );
+    }
+
+    return Response.json(
+      { message: "삭제 성공", deletedId: _id },
+      { status: 200 }
+    );
   } catch (err) {
     return Response.json({ message: err }, { status: 500 });
   }
