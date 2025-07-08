@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { IoClose } from "react-icons/io5";
+import { FaPencilAlt } from "react-icons/fa";
 
 interface IdProps {
   playerId: string;
@@ -16,10 +16,10 @@ export default function PlayerUpdateBtn({ playerId }: IdProps) {
   return (
     <button
       type="button"
-      className="close-btn  text-sm bg-[#fff] font-bold py-[2px] px-[10px] rounded-[8px] flex items-center"
+      className="close-btn  text-sm text-white bg-[#f37812] font-bold px-3 rounded-[8px] flex items-center"
       onClick={handleLinkClick}
     >
-      수정 <IoClose />
+      수정 <FaPencilAlt className="ml-1" />
     </button>
   );
 }

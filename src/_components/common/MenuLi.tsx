@@ -12,7 +12,7 @@ export default function MenuLi({ handleMenuTab, menu }: MenuProps) {
     전술보드: "tactics",
     드래프트: "draft",
     "선수 티어메이커": "tiermaker",
-    "선수 등록": "create",
+    선수등록: "create",
   };
 
   const path = menuMap[menu] || "/";

@@ -40,7 +40,7 @@ export default function PlayerCard({ item }: PlayerProps) {
           <div className="img-box overflow-hidden relative w-full h-[194px]">
             <Image
               src={item.image || "/team1.png"}
-              alt="더미이미지"
+              alt="선수 프로필"
               width={292}
               height={194}
               className="transition-all duration-500 ease-in-out group-hover:scale-125"
