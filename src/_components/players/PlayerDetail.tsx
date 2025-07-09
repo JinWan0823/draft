@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { GiTrophyCup } from "react-icons/gi";
 import { IoMdInformationCircleOutline } from "react-icons/io";
@@ -8,6 +9,7 @@ import CareerList from "./CareerList";
 import { PlayerInfoProps } from "@/_types/playerTypes";
 import PlayerUpdateBtn from "./PlayerUpdateBtn";
 import PlayerDeleteBtn from "./PlayerDeleteBtn";
+import { useSession } from "next-auth/react";
 
 interface PlayerProps {
   info: PlayerInfoProps;
@@ -20,6 +22,8 @@ export default function PlayerDetail({
   handleModal,
   fetchPlayers,
 }: PlayerProps) {
+  const { data: session } = useSession();
+
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[9999] bg-[#000000bf] flex items-center justify-center">
       <div className="bg-[#fff] rounded-[20px] max-w-[900px] w-[90%] max-h-[85vh] overflow-y-auto custom-scrollbar">
@@ -43,12 +47,16 @@ export default function PlayerDetail({
           </button>
 
           <div className="flex gap-1 absolute right-[16px] bottom-[16px]">
-            <PlayerUpdateBtn playerId={info._id} />
-            <PlayerDeleteBtn
-              playerId={info._id}
-              fetchPlayers={fetchPlayers}
-              handleModal={handleModal}
-            />
+            {session?.user && (
+              <>
+                <PlayerUpdateBtn playerId={info._id} />
+                <PlayerDeleteBtn
+                  playerId={info._id}
+                  fetchPlayers={fetchPlayers}
+                  handleModal={handleModal}
+                />
+              </>
+            )}
           </div>
         </div>
 

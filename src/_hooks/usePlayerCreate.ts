@@ -1,5 +1,6 @@
 import { useAlert } from "@/_context/AlertContext";
 import { Achivement, PlayerInfoProps } from "@/_types/playerTypes";
+import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -22,6 +23,8 @@ export default function usePlayerCreate(mode: "create" | "edit") {
   const { showAlert } = useAlert();
   const router = useRouter();
   const { id } = useParams();
+
+  const { data: session } = useSession();
 
   const addCareerInput = () => {
     setCareerArr((prev) => [...prev, { tournament: "", result: "" }]);
@@ -65,6 +68,12 @@ export default function usePlayerCreate(mode: "create" | "edit") {
 
   const handlePlayerCreate = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!session?.user) {
+      showAlert("유저 정보가 없습니다.");
+      return;
+    }
+
     if (!playerName || selectedPosition === "포지션 선택") {
       showAlert("선수이름과 포지션은 필수입니다!");
       return;
@@ -134,6 +143,11 @@ export default function usePlayerCreate(mode: "create" | "edit") {
   //수정모드 폼 전송
   const handlePlayerUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!session?.user) {
+      showAlert("유저 정보가 없습니다.");
+      return;
+    }
 
     if (!playerName || selectedPosition === "포지션 선택") {
       showAlert("선수이름과 포지션은 필수입니다!");
