@@ -4,7 +4,7 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
 
 export async function GET() {
   const client = await connectDB;
