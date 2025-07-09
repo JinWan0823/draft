@@ -17,6 +17,7 @@ export default function Players() {
     selectedOpt,
     selectedPosition,
     allPlayers,
+    fetchPlayers,
   } = usePlayers();
   return (
     <section className="w-[1240px] mx-auto py-[120px]">
@@ -66,7 +67,7 @@ export default function Players() {
       </div>
       <ul className="grid grid-cols-4 gap-6 w-full mt-[20px]">
         {filteredPlayers.map((item, idx) => (
-          <PlayerCard key={idx} item={item} />
+          <PlayerCard key={idx} item={item} fetchPlayers={fetchPlayers} />
         ))}
       </ul>
     </section>
