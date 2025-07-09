@@ -19,12 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body>
         <SessionProviderWrapper>
           <AlertProvider>
             <main>{children}</main>
-            <footer></footer>
             <MenuBtn />
             <ModeBtn />
             <AdminBadge />
