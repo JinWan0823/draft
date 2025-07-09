@@ -9,10 +9,10 @@ export default function Home() {
   const { data: session } = useSession();
 
   return (
-    <section className="w-[1240px] mx-auto py-[120px]">
+    <section className="max-w-[1240px] mx-auto py-[120px] w-[95%] lg:w-[95%]">
       <Logo />
       <SearchBar />
-      <ul className="grid grid-cols-3 gap-8 w-full mt-[20px]">
+      <ul className="grid grid-cols-1 gap-8 w-full mt-[20px] md:grid-cols-2 lg:grid-cols-3">
         <MenuList category={"선수 목록"} />
         <MenuList category={"전술보드"} />
         <MenuList category={"드래프트"} />
