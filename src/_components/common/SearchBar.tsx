@@ -5,8 +5,11 @@ import PlayerDetail from "../players/PlayerDetail";
 import { useState } from "react";
 import { PlayerInfoProps } from "@/_types/playerTypes";
 import { useAlert } from "@/_context/AlertContext";
+import usePlayers from "@/_hooks/usePlayers";
 
 export default function SearchBar() {
+  const { fetchPlayers } = usePlayers();
+
   const [modal, setModal] = useState(false);
   const [playerInfo, setPlayerInfo] = useState<PlayerInfoProps>();
   const [searchText, setSearchText] = useState("");
@@ -57,7 +60,11 @@ export default function SearchBar() {
         </form>
       </div>
       {modal && playerInfo && (
-        <PlayerDetail info={playerInfo} handleModal={handleModal} />
+        <PlayerDetail
+          fetchPlayers={fetchPlayers}
+          info={playerInfo}
+          handleModal={handleModal}
+        />
       )}
     </>
   );
