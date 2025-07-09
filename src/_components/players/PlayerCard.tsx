@@ -7,6 +7,7 @@ import { Achivement } from "@/_types/playerTypes";
 
 interface PlayerProps {
   item: ItemProps;
+  fetchPlayers: () => void;
 }
 
 interface ItemProps {
@@ -20,7 +21,7 @@ interface ItemProps {
   achievements: Achivement[];
 }
 
-export default function PlayerCard({ item }: PlayerProps) {
+export default function PlayerCard({ item, fetchPlayers }: PlayerProps) {
   const [openModal, setOpenModal] = useState(false);
 
   const handleModal = () => {
@@ -63,7 +64,13 @@ export default function PlayerCard({ item }: PlayerProps) {
         </div>
       </li>
 
-      {openModal && <PlayerDetail info={item} handleModal={handleModal} />}
+      {openModal && (
+        <PlayerDetail
+          info={item}
+          fetchPlayers={fetchPlayers}
+          handleModal={handleModal}
+        />
+      )}
     </>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import useAllPlayers from "./useAllPlayer";
 
 export default function usePlayers() {
-  const { allPlayers } = useAllPlayers();
+  const { allPlayers, fetchPlayers } = useAllPlayers();
 
   const [selectedOpt, setSelectedOpt] = useState("이름순");
   const [selectedPosition, setSelectedPosition] = useState("포지션 선택");
@@ -45,5 +45,6 @@ export default function usePlayers() {
     allPlayers,
     selectedOpt,
     selectedPosition,
+    fetchPlayers,
   };
 }
