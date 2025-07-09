@@ -1,4 +1,5 @@
 import { useAlert } from "@/_context/AlertContext";
+import { useSession } from "next-auth/react";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 interface IdProps {
@@ -13,8 +14,14 @@ export default function PlayerDeleteBtn({
   fetchPlayers,
 }: IdProps) {
   const { showAlert } = useAlert();
+  const { data: session } = useSession();
 
   const handleDeleteClick = async () => {
+    if (!session?.user) {
+      showAlert("유저 정보가 없습니다.");
+      return;
+    }
+
     if (!confirm("정말로 이 선수를 삭제하시겠습니까?")) return;
 
     try {

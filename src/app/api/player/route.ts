@@ -3,6 +3,8 @@ import { NextRequest } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
 import { ObjectId } from "mongodb";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET() {
   const client = await connectDB;
@@ -22,6 +24,15 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session?.user) {
+    return Response.json(
+      { message: "로그인 정보가 필요합니다." },
+      { status: 400 }
+    );
+  }
+
   const formData = await req.formData();
   const file = formData.get("image") as File;
   const name = formData.get("name")?.toString();
@@ -92,6 +103,15 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session?.user) {
+    return Response.json(
+      { message: "로그인 정보가 필요합니다." },
+      { status: 400 }
+    );
+  }
+
   const formData = await req.formData();
   const _id = formData.get("_id")?.toString();
 
@@ -162,6 +182,15 @@ export async function PUT(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session?.user) {
+    return Response.json(
+      { message: "로그인 정보가 필요합니다." },
+      { status: 400 }
+    );
+  }
+
   const { searchParams } = new URL(req.url);
   const _id = searchParams.get("_id");
 
