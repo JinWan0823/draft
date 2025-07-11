@@ -22,7 +22,7 @@ export default function DraftResult({
           최종 팀 결과
         </h2>
         {coachList.length === 0 && <p>아직 드래프트가 진행되지 않았습니다!</p>}
-        <ul className="flex flex-wrap items-start my-8 gap-3">
+        <ul className="flex flex-wrap items-start my-8 gap-3 sm:justify-center md:justify-start">
           {coachList.map((coach, idx) => (
             <ResultCard key={idx} coach={coach} />
           ))}

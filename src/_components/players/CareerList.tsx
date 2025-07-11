@@ -22,7 +22,7 @@ export default function CareerList({ career }: CareerProps) {
 
   return (
     <li
-      className={`w-full p-4 border-l-6 rounded-[12px] bg-gradient-to-r from-white via-white to-[${trophyColor(career.result)}] flex items-center`}
+      className={`w-full sm:p-4 p-2 border-l-6 rounded-[12px] bg-gradient-to-r from-white via-white to-[${trophyColor(career.result)}] flex items-center`}
       style={{ borderColor: trophyColor(career.result) }}
     >
       <GiTrophyCup

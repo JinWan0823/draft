@@ -20,12 +20,12 @@ export default function PlayersClient() {
     fetchPlayers,
   } = usePlayers();
   return (
-    <section className="w-[1240px] mx-auto py-[120px]">
+    <section className="max-w-[1240px] w-[95%] mx-auto py-[120px]">
       <Logo />
       <SearchBar />
 
-      <div className="w-full p-[16px] bg-gray-200 shadow-xl rounded flex items-center justify-between">
-        <ul className="flex">
+      <div className="w-full p-[16px] bg-gray-200 shadow-xl rounded flex flex-wrap items-center justify-between">
+        <div className="flex">
           {sortOptions.map((opt) => (
             <SelectOpt
               key={opt}
@@ -44,9 +44,9 @@ export default function PlayersClient() {
               setSelectedPosition={setSelectedPosition}
             />
           </div>
-        </ul>
+        </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center mt-2 sm:mt-0">
           <div className="p-[4px] px-[12px] flex items-center mr-[10px] bg-white rounded">
             <MdPeople className="text-4xl text-[#f37812] mr-[12px]" />
             <div>
@@ -65,7 +65,7 @@ export default function PlayersClient() {
           </div>
         </div>
       </div>
-      <ul className="grid grid-cols-4 gap-6 w-full mt-[20px]">
+      <ul className="grid grid-cols-1 gap-6 w-full mt-[20px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {filteredPlayers.map((item, idx) => (
           <PlayerCard key={idx} item={item} fetchPlayers={fetchPlayers} />
         ))}

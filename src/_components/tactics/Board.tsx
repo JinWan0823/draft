@@ -1,17 +1,26 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-export default function Board() {
+interface Dimensions {
+  width: number;
+  height: number;
+}
+
+interface BoardProps {
+  dimensions: Dimensions;
+  setDimensions: React.Dispatch<React.SetStateAction<Dimensions>>;
+}
+
+export default function Board({ setDimensions, dimensions }: BoardProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const resize = () => {
       if (!containerRef.current) return;
       const width = containerRef.current.clientWidth;
-      const height = 580;
+      const height = width / 1.54;
       setDimensions({ width, height });
     };
 

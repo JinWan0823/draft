@@ -42,11 +42,11 @@ export default function SearchBar() {
 
   return (
     <>
-      <div className="my-[20px] border-[#f37812] border-3 mx-auto mb-6 w-full max-w-[800px] rounded-full px-[16px] py-[10px]">
+      <div className="my-[20px] border-[#f37812] border-3 mx-auto mb-6 w-full max-w-[800px] rounded-full px-4 py-0 sm:py-2">
         <form onSubmit={handleSearch} className="w-full flex">
           <input
             type="text"
-            className="w-full outline-none text-xl"
+            className="w-full outline-none sm:text-lg"
             placeholder="선수 검색"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}

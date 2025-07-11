@@ -2,9 +2,9 @@ import { FaInfoCircle } from "react-icons/fa";
 
 export default function DraftIntro() {
   return (
-    <div className="p-4 w-full bg-[#fff] shadow-lg rounded flex items-center">
+    <div className="p-4 w-full bg-[#fff] shadow-lg rounded items-center sm:felx">
       <div className="mr-4">
-        <FaInfoCircle className="text-6xl text-[#f37812]" />
+        <FaInfoCircle className="text-3xl text-[#f37812] sm:text-6xl" />
       </div>
       <div>
         <h2 className="font-bold text-2xl text-[#f37812]">드래프트</h2>

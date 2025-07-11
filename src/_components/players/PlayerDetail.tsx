@@ -60,15 +60,15 @@ export default function PlayerDetail({
           </div>
         </div>
 
-        <div className="p-[16px] py-[24px]">
+        <div className="p-2 py-4 sm:p-4 py-8">
           <div>
-            <div className="title border-b-2 pb-2  text-xl font-bold text-[#f37812]">
+            <div className="title border-b-2 pb-2  text-lg sm:text-xl font-bold text-[#f37812]">
               <p className="flex items-center">
-                <IoMdInformationCircleOutline className="text-2xl mr-[4px]" />
+                <IoMdInformationCircleOutline className="text-xl sm:text-2xl mr-[4px]" />
                 기본 정보
               </p>
             </div>
-            <ul className="p-[16px]">
+            <ul className="p-1 sm:p-4">
               <li className="flex items-center">
                 <PiSoccerBallDuotone className="mr-1 text-[#f37812]" /> 주포지션
                 : {info.position}
@@ -90,13 +90,13 @@ export default function PlayerDetail({
           </div>
 
           <div className="mt-[20px]">
-            <div className="title border-b-2 pb-2 text-xl font-bold text-[#f37812]">
+            <div className="title border-b-2 pb-2 text-lg sm:text-xl font-bold text-[#f37812]">
               <p className="flex items-center">
-                <GiTrophyCup className="text-2xl mr-[4px]" />
+                <GiTrophyCup className="text-xl sm:text-2xl mr-[4px]" />
                 대회 기록
               </p>
             </div>
-            <ul className="p-2 py-4 space-y-3">
+            <ul className="p-1 py-2 sm:p-2 sm:py-4 space-y-3">
               {info.achievements.map((career, idx) => (
                 <CareerList key={idx} career={career} />
               ))}

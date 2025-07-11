@@ -12,7 +12,7 @@ export default function PositionCategory({
   );
 
   return (
-    <div className="border-gray-200 border-1 p-2 w-[24%]">
+    <div className="border-gray-200 border-1 p-2 w-full sm:w-[48%] lg:w-[24%]">
       <div>
         <p>
           <span

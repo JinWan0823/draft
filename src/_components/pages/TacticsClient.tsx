@@ -31,13 +31,15 @@ export default function TacticsClient() {
     handleDeleteMode,
     handleDeleteDummyPlayer,
     handleDeletePlayer,
+    dimensions,
+    setDimensions,
   } = useTactics();
 
   return (
-    <section className="w-[1100px] mx-auto py-[120px]">
+    <section className="max-w-[1100px] w-[95%] mx-auto py-[120px]">
       <Logo />
       <TacticList />
-      <div className="fixed right-[20px] top-1/2 -translate-y-1/2">
+      <div className="fixed right-[20px] top-1/2 -translate-y-1/2 z-999999">
         <ToolList
           handleDummyPlayer={handleDummyPlayer}
           setBall={setBall}
@@ -55,11 +57,11 @@ export default function TacticsClient() {
       </div>
       <TacticIntro />
       <div
-        className="p-[20px] mt-6 w-full bg-white relative mx-auto shadow-lg rounded"
+        className="p-2 mt-6 w-full bg-white relative mx-auto shadow-lg rounded sm:p-4"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        <Board />
+        <Board dimensions={dimensions} setDimensions={setDimensions} />
         {drawing && <DrawingCanvas redPen={redPen} />}
         {players.map((player) => (
           <DraggablePlayer

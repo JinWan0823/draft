@@ -38,7 +38,7 @@ export default function DraftClient() {
   const { allPlayers } = useAllPlayers();
 
   return (
-    <section className="w-[1240px] mx-auto py-[120px]">
+    <section className="max-w-[1240px] w-[95%] mx-auto py-[120px]">
       <Logo />
       <DraftIntro />
       {draftResult && (
@@ -53,7 +53,10 @@ export default function DraftClient() {
         <h2 className="text-[#f37812] py-4 border-b-1 border-gray-300 flex items-center text-xl font-bold">
           <FaUserTie className="text-2xl mr-2" /> 감독 관리
         </h2>
-        <form className="flex mt-6 gap-2" onSubmit={handleSubmit}>
+        <form
+          className="flex mt-6 gap-2 flex-col sm:flex-row"
+          onSubmit={handleSubmit}
+        >
           <input
             type="text"
             value={inputValue}
@@ -63,7 +66,7 @@ export default function DraftClient() {
           />
           <button
             type="submit"
-            className="flex items-center bg-[#f37812] p-4 text-white rounded"
+            className="flex items-center bg-[#f37812] p-2 text-white rounded sm:p-4"
           >
             <FaPlus className="mr-2" /> 감독 추가
           </button>

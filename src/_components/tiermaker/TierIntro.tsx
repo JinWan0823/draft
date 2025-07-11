@@ -2,9 +2,9 @@ import { ImTrophy } from "react-icons/im";
 
 export default function TierIntro() {
   return (
-    <div className="p-4 w-full bg-[#fff] shadow-lg rounded flex items-center">
+    <div className="p-4 w-full bg-[#fff] shadow-lg rounded items-center sm:felx">
       <div className="mr-4">
-        <ImTrophy className="text-6xl text-[#f37812]" />
+        <ImTrophy className="text-3xl text-[#f37812] sm:text-6xl" />
       </div>
       <div>
         <h2 className="font-bold text-2xl text-[#f37812]">선수 티어 메이커</h2>
