@@ -11,6 +11,12 @@ export const metadata = {
     template: "%s | FC25 드래프트",
   },
   description: "축구 선수 티어, 전술, 드래프트 플랫폼",
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon-180x180.png",
+    shortcut: "/icon-192x192.png",
+  },
 };
 
 export default function RootLayout({
