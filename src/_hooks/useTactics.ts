@@ -22,6 +22,8 @@ export default function useTactics() {
   const [ball, setBall] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
 
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
   const [redPen, setRedPen] = useState(false);
   const [bluePen, setBluePen] = useState(false);
   const [drawing, setDrawing] = useState(false);
@@ -46,8 +48,17 @@ export default function useTactics() {
   };
 
   const handleDummyPlayer = (teamNumber: number) => {
-    const randomX = Math.floor(Math.random() * 800) + 100;
-    const randomY = Math.floor(Math.random() * 550);
+    const paddingX = 0.1; // 좌우 여백 10%
+    const paddingY = 0.05; // 상하 여백 5%
+
+    const minX = dimensions.width * paddingX;
+    const maxX = dimensions.width * (1 - paddingX);
+    const minY = dimensions.height * paddingY;
+    const maxY = dimensions.height * (1 - paddingY);
+
+    const randomX = Math.floor(Math.random() * (maxX - minX) + minX);
+    const randomY = Math.floor(Math.random() * (maxY - minY) + minY);
+
     setDummyPlayers((prev) => [
       ...prev,
       {
@@ -93,5 +104,7 @@ export default function useTactics() {
     handleDeleteMode,
     handleDeleteDummyPlayer,
     handleDeletePlayer,
+    setDimensions,
+    dimensions,
   };
 }

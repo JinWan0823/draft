@@ -29,7 +29,7 @@ export default function TierMakerClient() {
   } = useTierMaker();
 
   return (
-    <section className="w-[1240px] mx-auto py-[120px]">
+    <section className="max-w-[1240px] w-[95%] mx-auto py-[120px]">
       <TierTool
         hanldeTierPlus={hanldeTierPlus}
         handdleTierMinus={handdleTierMinus}
@@ -53,8 +53,8 @@ export default function TierMakerClient() {
           ))}
         </div>
 
-        <div className="flex items-center gap-4 p-2 mt-8">
-          <div className="w-[35%]">
+        <div className="items-center gap-4 p-2 mt-8 sm:flex">
+          <div className="w-full sm:w-[35%]">
             <input
               type="text"
               value={searchValue}
@@ -63,7 +63,7 @@ export default function TierMakerClient() {
               placeholder="선수 이름으로 검색"
             />
           </div>
-          <div className="w-[35%]">
+          <div className="w-full sm:w-[35%] mt-1 sm:mt-0">
             <CustomSelect
               selectedPosition={selectedPosition}
               setSelectedPosition={setSelectedPosition}
@@ -71,7 +71,7 @@ export default function TierMakerClient() {
           </div>
           <button
             type="button"
-            className="flex items-center rounded py-1 px-4 hover:bg-gray-300"
+            className="flex items-center justify-center rounded py-1 px-4 hover:bg-gray-300 mt-1 w-full sm:mt-0 sm:w-auto"
             onClick={handleResetFilter}
           >
             <GrPowerReset className="mr-2 text-lg" /> 필터 초기화

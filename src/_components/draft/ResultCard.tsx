@@ -8,7 +8,7 @@ interface ResultCardProps {
 export default function ResultCard({ coach }: ResultCardProps) {
   return (
     <li
-      className={`shadow-xl relative px-2 py-4 rounded-[16px] border-1 border-gray-200 w-[32%] bg-white font-bold`}
+      className={`shadow-xl relative px-2 py-4 rounded-[16px] border-1 border-gray-200 w-full bg-white font-bold sm:w-[45%] md:w-[31%]`}
       style={{
         borderTop: `6px solid ${coach.color}`,
       }}

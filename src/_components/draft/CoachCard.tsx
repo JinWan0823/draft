@@ -7,8 +7,8 @@ export default function CoachCard({
 }: CoachInfo) {
   return (
     <li
-      className={`shadow-xl relative p-4 py-8 rounded-[16px] border-1 border-gray-200 w-[23.5%] bg-white
-        ${coach.order === currentOrder - 1 ? "rank-active" : ""}`}
+      className={`shadow-xl relative p-4 py-8 rounded-[16px] border-1 border-gray-200 w-full bg-white
+        ${coach.order === currentOrder - 1 ? "rank-active" : ""} sm:w-[45%]  lg:w-[23%]`}
       style={{
         borderTop: `6px solid ${coach.color}`,
       }}

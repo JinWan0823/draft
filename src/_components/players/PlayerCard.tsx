@@ -44,7 +44,7 @@ export default function PlayerCard({ item, fetchPlayers }: PlayerProps) {
               alt="선수 프로필"
               width={292}
               height={194}
-              className="transition-all duration-500 ease-in-out group-hover:scale-125"
+              className="w-full h-full transition-all duration-500 ease-in-out group-hover:scale-125"
             />
             <div className="absolute bottom-[4px] left-[4px]">
               <PositionBadge position={item.position} />

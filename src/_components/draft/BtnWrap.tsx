@@ -8,24 +8,24 @@ export default function BtnWrap({
   setDraftResult,
 }: BtnProps) {
   return (
-    <div className="flex items-center justify-between mt-2">
-      <div className="flex items-center">
+    <div className="flex flex-col items-center justify-between mt-2 sm:flex-row">
+      <div className="flex items-center flex-col w-full sm:flex-row sm:w-auto">
         <button
           onClick={handleRandomSelect}
-          className="flex items-center mr-2 bg-[#f37812] p-2 text-white rounded"
+          className="flex w-full items-center bg-[#f37812] p-2 text-white rounded sm:w-auto sm:mr-2"
         >
           <FaRandom className="mr-2" /> 랜덤 감독 선택
         </button>
         <button
           onClick={handleCoachReset}
-          className="flex items-center bg-[#333] p-2 text-white rounded"
+          className="flex w-full items-center bg-[#333] p-2 mt-2 text-white rounded sm:w-auto sm:mt-0"
         >
           <FaUserMinus className="mr-2" /> 초기화
         </button>
       </div>
       <button
         onClick={() => setDraftResult(true)}
-        className="flex items-center bg-[#7aadb3] p-2 text-white rounded"
+        className="flex items-center bg-[#7aadb3] p-2 text-white rounded w-full mt-2 sm:w-auto"
       >
         <FaCheckCircle className="mr-2" />
         최종 팀 확정
