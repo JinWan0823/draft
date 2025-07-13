@@ -29,7 +29,7 @@ export default function TierMakerClient() {
   } = useTierMaker();
 
   return (
-    <section className="max-w-[1240px] w-[95%] mx-auto py-[120px]">
+    <section className="max-w-[1240px] w-[95%] mx-auto py-[120px] pb-[160px] md:pb-[120px]">
       <TierTool
         hanldeTierPlus={hanldeTierPlus}
         handdleTierMinus={handdleTierMinus}

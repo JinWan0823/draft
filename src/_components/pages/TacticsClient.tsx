@@ -36,10 +36,9 @@ export default function TacticsClient() {
   } = useTactics();
 
   return (
-    <section className="max-w-[1100px] w-[95%] mx-auto py-[120px]">
+    <section className="max-w-[1100px] w-[95%] mx-auto py-[120px] pb-[250px] md:pb-[120px]">
       <Logo />
-      <TacticList />
-      <div className="fixed right-[20px] top-1/2 -translate-y-1/2 z-999999">
+      <div className="max-w-[95%] fixed items-center z-9999 right-1/2 bottom-[20px] translate-x-1/2 block md:max-w-[180px] md:right-[20px] md:bottom-1/2 md:translate-x-0 md:translate-y-1/2">
         <ToolList
           handleDummyPlayer={handleDummyPlayer}
           setBall={setBall}
@@ -56,6 +55,7 @@ export default function TacticsClient() {
         />
       </div>
       <TacticIntro />
+      <TacticList />
       <div
         className="p-2 mt-6 w-full bg-white relative mx-auto shadow-lg rounded sm:p-4"
         onDrop={handleDrop}

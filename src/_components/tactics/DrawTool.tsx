@@ -45,9 +45,9 @@ export default function DrawTool({
   };
 
   return (
-    <div className="p-1 py-2 mt-4 w-[180px] bg-white shadow-xl rounded-[20px] border-r-4 border-[#f37812]">
+    <div className="w-full p-1 py-2 mt-2 bg-white shadow-xl rounded-[20px] border-r-4 border-[#f37812] md:mt-4">
       <p className="text-lg font-bold text-center text-[#f37812]">그림판</p>
-      <ul className="mt-2 p-2">
+      <ul className="mt-2 p-2 flex items-center justify-center font-bold text-sm gap-1 md:text-md md:block md:gap-0">
         <li
           className={`bg-[#dfdfdf] mt-1 rounded flex items-center text-red-600 font-bold p-2 px-3 cursor-pointer ${redPen ? "border-1" : ""}`}
           onClick={() => handleDraw("red")}
