@@ -20,7 +20,7 @@ export default function TacticList() {
   });
 
   return (
-    <div className="p-1 py-2 w-[220px] fixed left-[20px] top-1/2 -translate-y-1/2 bg-white shadow-xl rounded-[20px] border-l-4 border-[#f37812] z-999999">
+    <div className="p-1 py-2 mt-2 w-full bg-white shadow-xl rounded-[20px] border-l-4 border-[#f37812] z-9999 md:w-[220px] md:mt-0 md:fixed md:left-[20px] md:top-1/2 md:-translate-y-1/2">
       <p className="text-lg font-bold text-center text-[#f37812]">선수 목록</p>
       <div className="p-1">
         <input
@@ -29,7 +29,7 @@ export default function TacticList() {
           onChange={(e) => setSearch(e.currentTarget.value)}
         />
       </div>
-      <ul className="max-h-[60vh] h-[60vh] overflow-y-scroll custom-scrollbar p-1">
+      <ul className="max-h-[210px] h-[210px] overflow-y-scroll custom-scrollbar p-1 md:max-h-[60vh] md:h-[60vh]">
         {filteredPlayers.map((item, key) => (
           <TacticPlayer item={item} key={key} />
         ))}
